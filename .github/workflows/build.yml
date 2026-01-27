@@ -1,62 +1,38 @@
 name: Build
 
-concurrency: 
-  group: "build"
-  cancel-in-progress: true
-
 on:
   push:
     branches:
       - main
-    paths-ignore:
-      - '*.md'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Source
         uses: actions/checkout@v3
         with:
           path: "src"
-
-      - name: Checkout builds
-        uses: actions/checkout@v3
-        continue-on-error: true
-        with:
-          ref: "builds"
-          path: "builds"
-      
-      - name: Clean old builds
-        run: |
-          mkdir -p $GITHUB_WORKSPACE/builds
-          rm -f $GITHUB_WORKSPACE/builds/*.cs3 || true
 
       - name: Setup JDK 11
         uses: actions/setup-java@v3
         with:
           java-version: '11'
-          distribution: 'adopt'
-
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+          distribution: 'temurin'
 
       - name: Build Plugins
         run: |
-          cd $GITHUB_WORKSPACE/src
+          cd src
           chmod +x gradlew
           ./gradlew make makePluginsJson
-          cp -r **/build/*.cs3 $GITHUB_WORKSPACE/builds/ 2>/dev/null || true
-          cp build/plugins.json $GITHUB_WORKSPACE/builds/
+          mkdir -p ../dist
+          cp build/plugins.json ../dist/
+          cp **/build/*.cs3 ../dist/ 2>/dev/null || true
 
-      - name: Push builds
-        run: |
-          cd $GITHUB_WORKSPACE/builds
-          git init
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
-          git add .
-          git commit -m "Build $GITHUB_SHA" || exit 0
-          git branch -M builds
-          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          git push origin builds --force
+      - name: Deploy to Builds Branch
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+          branch: builds
+          token: ${{ secrets.GITHUB_TOKEN }}
+          single-commit: true
