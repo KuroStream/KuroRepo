@@ -31,12 +31,6 @@ jobs:
           mkdir -p ../dist
           cp build/plugins.json ../dist/
           cp **/build/*.cs3 ../dist/ 2>/dev/null || true
-          
-          chmod +x gradlew
-          ./gradlew make makePluginsJson
-          mkdir -p ../dist
-          cp build/plugins.json ../dist/
-          cp **/build/*.cs3 ../dist/ 2>/dev/null || true
 
       - name: Deploy to Builds Branch
         uses: JamesIves/github-pages-deploy-action@v4
