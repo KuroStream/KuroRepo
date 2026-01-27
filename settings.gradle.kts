@@ -1,12 +1,9 @@
 rootProject.name = "KuroStreamPlugins"
 
-// Este script buscará CUALQUIER carpeta que tenga un build.gradle.kts
-File(rootDir, ".").eachDir { dir ->
-    if (File(dir, "build.gradle.kts").exists()) {
-        include(dir.name)
-    }
-}
+// Solo incluimos las carpetas que ya están listas y refactorizadas.
+// A medida que arregles más, las vas añadiendo aquí abajo.
 
-fun File.eachDir(block: (File) -> Unit) {
-    listFiles()?.filter { it.isDirectory }?.forEach { block(it) }
-}
+include("JKAnimeProvider")
+
+// Si tienes alguna otra carpeta ya lista para KuroStream, añádela así:
+// include("NombreDeTuCarpeta")
