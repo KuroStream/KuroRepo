@@ -11,8 +11,7 @@ jobs:
     steps:
       - name: Checkout Source
         uses: actions/checkout@v3
-        with:
-          path: "src"
+        # Quitamos el path: "src" para que los archivos queden en la raíz
 
       - name: Setup JDK 11
         uses: actions/setup-java@v3
@@ -22,15 +21,15 @@ jobs:
 
       - name: Build Plugins
         run: |
-          cd src
-          # Lista completa de proveedores no refactorizados para KuroStream
-          rm -rf PeliculasFlixProvider/ PelispediaProvider/ Pelisplus4KProvider/ PelisplusHDProvider/ PelisplusSOProvider/ PlayhubProvider/ SeriesflixProvider/ SeriesMetroProvider/ SoloLatinoProvider/ TioAnimeProvider/ AnimensionProvider/ AnimeflvProvider/ AnimeflvIOProvider/ AnimeJlProvider/ AniwatchProvider/ AniwaveProvider/ BflixProvider/ CablevisionHdProvider/ CinecalidadProvider/ CuevanaProvider/ ComamosRamenProvider/ DoramasytProvider/ EstrenosDoramasProvider/ IdonehdProvider/ InkapelisProvider/ JkanimeProvider/ MonoschinosProvider/
-          
+          # Ya no necesitamos "cd src" porque todo está en la raíz
           chmod +x gradlew
           ./gradlew make makePluginsJson
-          mkdir -p ../dist
-          cp build/plugins.json ../dist/
-          cp **/build/*.cs3 ../dist/ 2>/dev/null || true
+          
+          # Preparamos la carpeta de salida
+          mkdir -p dist
+          cp build/plugins.json dist/
+          # Copiamos todos los archivos .cs3 generados
+          find . -name "*.cs3" -exec cp {} dist/ \;
 
       - name: Deploy to Builds Branch
         uses: JamesIves/github-pages-deploy-action@v4
