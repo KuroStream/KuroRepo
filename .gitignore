@@ -10,3 +10,16 @@
 .cxx
 local.properties
 .vscode
+# Carpetas no refactorizadas - Ignorar para compilar KuroStream
+PeliculasFlixProvider/
+PelispediaProvider/
+Pelisplus4KProvider/
+PelisplusHDProvider/
+PelisplusSOProvider/
+PlayhubProvider/
+SeriesflixProvider/
+SeriesMetroProvider/
+SoloLatinoProvider/
+TioAnimeProvider/
+AnimensionProvider/
+AnimeflvProvider/
