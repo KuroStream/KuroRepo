@@ -1,10 +1,8 @@
 rootProject.name = "KuroStreamPlugins"
 
-// Solo incluimos las carpetas que ya están listas y refactorizadas.
-// A medida que arregles más, las vas añadiendo aquí abajo.
-
+// Definimos la ubicación real de cada carpeta para que el robot no se pierda
 include("JKAnimeProvider")
-include("AnimeflvProvider")
+project(":JKAnimeProvider").projectDir = file("JKAnimeProvider")
 
-// Si tienes alguna otra carpeta ya lista para KuroStream, añádela así:
-// include("NombreDeTuCarpeta")
+include("AnimeflvProvider")
+project(":AnimeflvProvider").projectDir = file("AnimeflvProvider")
