@@ -24,6 +24,7 @@ jobs:
 
       - name: Checkout builds
         uses: actions/checkout@master
+        continue-on-error: true
         with:
           ref: "builds"
           path: "builds"
