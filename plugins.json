@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Latanime",
+    "url": "Latanime.cs3",
+    "version": 1,
+    "authors": ["KuroStream"],
+    "language": "es"
+  },
+  {
+    "name": "PelisplusHD",
+    "url": "Pelisplushd.cs3",
+    "version": 1,
+    "authors": ["KuroStream"],
+    "language": "es"
+  },
+  {
+    "name": "AnimeAV1",
+    "url": "Animeav1.cs3",
+    "version": 1,
+    "authors": ["KuroStream"],
+    "language": "es"
+  },
+  {
+    "name": "Cricify",
+    "url": "CricifyProvider.cs3",
+    "version": 1,
+    "authors": ["KuroStream"],
+    "language": "es"
+  },
+  {
+    "name": "Rtally",
+    "url": "Rtally.cs3",
+    "version": 1,
+    "authors": ["KuroStream"],
+    "language": "es"
+  },
+  {
+    "name": "SKTech",
+    "url": "SKTechProvider.cs3",
+    "version": 1,
+    "authors": ["KuroStream"],
+    "language": "es"
+  },
+  {
+    "name": "SunGo",
+    "url": "SunGoProvider.cs3",
+    "version": 1,
+    "authors": ["KuroStream"],
+    "language": "es"
+  },
+  {
+    "name": "Mega buscador",
+    "url": "MegaProvider.cs3",
+    "version": 1,
+    "authors": ["KuroStream"],
+    "language": "es"
+  }
+]
