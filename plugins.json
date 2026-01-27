@@ -27,7 +27,52 @@
     "language": "es"
   },
   {
-    "name": "Cricify",
+    "name": "Cinecalidad",
+    "url": "CinecalidadProvider.cs3",
+    "version": 1,
+    "authors": [
+      "KuroStream"
+    ],
+    "language": "es"
+  },
+  {
+    "name": "SoloLatino",
+    "url": "SoloLatinoProvider.cs3",
+    "version": 1,
+    "authors": [
+      "KuroStream"
+    ],
+    "language": "es"
+  },
+  {
+    "name": "PeliculasFlix",
+    "url": "PeliculasFlixProvider.cs3",
+    "version": 1,
+    "authors": [
+      "KuroStream"
+    ],
+    "language": "es"
+  },
+  {
+    "name": "Entre Peliculas y Series",
+    "url": "EntrepeliculasyseriesProvider.cs3",
+    "version": 1,
+    "authors": [
+      "KuroStream"
+    ],
+    "language": "es"
+  },
+  {
+    "name": "LACartoons",
+    "url": "LACartoonsProvider.cs3",
+    "version": 1,
+    "authors": [
+      "KuroStream"
+    ],
+    "language": "es"
+  },
+  {
+    "name": "Deportes y TV (Cricify)",
     "url": "CricifyProvider.cs3",
     "version": 1,
     "authors": [
@@ -36,7 +81,16 @@
     "language": "es"
   },
   {
-    "name": "Rtally",
+    "name": "Cablevisión HD (Canales)",
+    "url": "CablevisionHdProvider.cs3",
+    "version": 4,
+    "authors": [
+      "KuroStream"
+    ],
+    "language": "es"
+  },
+  {
+    "name": "TV en Vivo (Rtally)",
     "url": "Rtally.cs3",
     "version": 1,
     "authors": [
@@ -45,7 +99,7 @@
     "language": "es"
   },
   {
-    "name": "SKTech",
+    "name": "SKTech TV",
     "url": "SKTechProvider.cs3",
     "version": 1,
     "authors": [
@@ -54,7 +108,7 @@
     "language": "es"
   },
   {
-    "name": "SunGo",
+    "name": "SunGo TV",
     "url": "SunGoProvider.cs3",
     "version": 1,
     "authors": [
@@ -63,7 +117,7 @@
     "language": "es"
   },
   {
-    "name": "Mega buscador",
+    "name": "Mega Buscador",
     "url": "MegaProvider.cs3",
     "version": 1,
     "authors": [
