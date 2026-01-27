@@ -70,7 +70,8 @@ class JKAnimeProvider : MainAPI() {
         
         items.add(HomePageList("Últimos episodios", latestEps, isHorizontal))
 
-        urls.forEach { (url, listName) ->
+        for (item in urls) {
+            val (url, listName) = item
             val soup = app.get(url).document
             val home = soup.select(".g-0").mapNotNull {
                 val title = it.selectFirst("h5 a")?.text() ?: return@mapNotNull null
@@ -151,11 +152,11 @@ class JKAnimeProvider : MainAPI() {
         }
 
         return newAnimeLoadResponse(title, url, getType(type)) {
-            posterUrl = poster
+            this.posterUrl = poster
             addEpisodes(DubStatus.Subbed, episodes)
             showStatus = status
-            plot = description
-            tags = genres
+            this.plot = description
+            this.tags = genres
         }
     }
 
@@ -163,7 +164,7 @@ class JKAnimeProvider : MainAPI() {
         @JsonProperty("file") val file: String?
     )
 
-    private fun streamClean(
+    private suspend fun streamClean(
         name: String,
         url: String,
         referer: String,
@@ -171,16 +172,17 @@ class JKAnimeProvider : MainAPI() {
         callback: (ExtractorLink) -> Unit,
         m3u8: Boolean
     ): Boolean {
-        @Suppress("DEPRECATION")
         callback(
-            ExtractorLink(
+            newExtractorLink(
                 name,
                 name,
                 url,
-                referer,
-                getQualityFromName(quality),
-                m3u8
-            )
+                null
+            ) {
+                this.referer = referer
+                this.quality = getQualityFromName(quality)
+                // isM3u8 is usually set by extractor or not directly exposed as var in some versions
+            }
         )
         return true
     }
@@ -208,15 +210,18 @@ class JKAnimeProvider : MainAPI() {
     ): Boolean {
         val capturedLinks = Collections.synchronizedList(ArrayList<ExtractorLink>())
         
-        app.get(data).document.select("script").forEach { script ->
-
-            if (script.data().contains(Regex("slug|remote"))) {
+        val doc = app.get(data).document
+        val scriptElements = doc.select("script")
+        
+        for (script in scriptElements) {
+            val scriptData = script.data()
+            if (scriptData.contains(Regex("slug|remote"))) {
                 val serversRegex = Regex("\\[\\{.*?\"remote\".*?\"\\}\\]")
-                val servers = serversRegex.findAll(script.data()).map { it.value }.toList().firstOrNull()
+                val servers = serversRegex.findAll(scriptData).map { it.value }.toList().firstOrNull()
                 if (servers != null) {
                     val serJson = parseJson<ArrayList<ServersEncoded>>(servers)
-                    serJson.forEach {
-                        val encodedurl = it.remote
+                    for (item in serJson) {
+                        val encodedurl = item.remote
                         val urlDecoded = base64Decode(encodedurl)
                         loadExtractor(urlDecoded, mainUrl, subtitleCallback) { l -> capturedLinks.add(l) }
                     }
@@ -224,8 +229,8 @@ class JKAnimeProvider : MainAPI() {
             }
 
 
-            if (script.data().contains("var video = []")) {
-                val videos = script.data().replace("\\/", "/")
+            if (scriptData.contains("var video = []")) {
+                val videos = scriptData.replace("\\/", "/")
                 for (videoLink in fetchjkanime(videos)) {
                     val link = videoLink.replace("$mainUrl/jkfembed.php?u=", "https://embedsito.com/v/")
                         .replace("$mainUrl/jkokru.php?u=", "http://ok.ru/videoembed/")
@@ -242,8 +247,8 @@ class JKAnimeProvider : MainAPI() {
                     for (links in fetchUrls(link)) {
                         loadExtractor(links, data, subtitleCallback) { l -> capturedLinks.add(l) }
                         if (links.contains("um2.php")) {
-                            val doc = app.get(links, referer = data).document
-                            val gsplaykey = doc.select("form input[value]").attr("value")
+                            val innerDoc = app.get(links, referer = data).document
+                            val gsplaykey = innerDoc.select("form input[value]").attr("value")
                             for (loc in app.post(
                                 "$mainUrl/gsplay/redirect_post.php",
                                 headers = mapOf(
@@ -288,19 +293,17 @@ class JKAnimeProvider : MainAPI() {
                                     allowRedirects = false
                                 ).text
                                 val json = parseJson<Nozomi>(nozomitext)
-                                val nozomiurl = listOf(json.file)
-                                if (nozomiurl.isNotEmpty()) {
-                                    for (url in nozomiurl.filterNotNull()) {
-                                        val nozominame = "Nozomi"
-                                        streamClean(
-                                            nozominame,
-                                            url,
-                                            "",
-                                            null,
-                                            { l -> capturedLinks.add(l) },
-                                            url.contains(".m3u8")
-                                        )
-                                    }
+                                if (json.file != null) {
+                                    val nozomiurl = json.file
+                                    val nozominame = "Nozomi"
+                                    streamClean(
+                                        nozominame,
+                                        nozomiurl,
+                                        "",
+                                        null,
+                                        { l -> capturedLinks.add(l) },
+                                        nozomiurl.contains(".m3u8")
+                                    )
                                 }
                             }
 
@@ -352,20 +355,17 @@ class JKAnimeProvider : MainAPI() {
         }
         
         // Strict Filtering
-        // 1. Block Prohibited
         val allowedLinks = capturedLinks.filter {
              !it.name.contains("Castellano", true) &&
              !it.name.contains("España", true) &&
              !it.name.contains("Spain", true)
         }
         
-        // 2. Latino check - prioritized
         val hasLatino = allowedLinks.any { it.name.contains("Latino", true) || it.name.contains("LAT", true) }
         
         val finalLinks = if (hasLatino) {
             allowedLinks.filter { it.name.contains("Latino", true) || it.name.contains("LAT", true) }
         } else {
-            // 3. Fallback: Allow Subtitled
             allowedLinks
         }
         

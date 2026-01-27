@@ -34,15 +34,10 @@ class CinecalidadProvider : MainAPI() {
         val home = soup.select(".item.movies").map {
             val title = it.selectFirst("div.in_title")!!.text()
             val link = it.selectFirst("a")!!.attr("href")
-            TvSeriesSearchResponse(
-                title,
-                link,
-                this.name,
-                if (link.contains("/ver-pelicula/")) TvType.Movie else TvType.TvSeries,
-                it.selectFirst(".poster.custom img")!!.attr("data-src"),
-                null,
-                null,
-            )
+            val type = if (link.contains("/ver-pelicula/")) TvType.Movie else TvType.TvSeries
+            newTvSeriesSearchResponse(title, link, type) {
+                this.posterUrl = it.selectFirst(".poster.custom img")!!.attr("data-src")
+            }
         }
 
         return newHomePageResponse(request.name, home)
@@ -59,24 +54,13 @@ class CinecalidadProvider : MainAPI() {
             val isMovie = href.contains("/ver-pelicula/")
 
             if (isMovie) {
-                MovieSearchResponse(
-                    title,
-                    href,
-                    this.name,
-                    TvType.Movie,
-                    image,
-                    null
-                )
+                newMovieSearchResponse(title, href, TvType.Movie) {
+                    this.posterUrl = image
+                }
             } else {
-                TvSeriesSearchResponse(
-                    title,
-                    href,
-                    this.name,
-                    TvType.TvSeries,
-                    image,
-                    null,
-                    null
-                )
+                newTvSeriesSearchResponse(title, href, TvType.TvSeries) {
+                    this.posterUrl = image
+                }
             }
         }
     }
@@ -99,41 +83,25 @@ class CinecalidadProvider : MainAPI() {
             val isValid = seasonid.size == 2
             val episode = if (isValid) seasonid.getOrNull(1) else null
             val season = if (isValid) seasonid.getOrNull(0) else null
-            Episode(
-                href,
-                name,
-                season,
-                episode,
-                if (epThumb.contains("svg")) null else epThumb
-            )
+            newEpisode(href) {
+                this.name = name
+                this.season = season
+                this.episode = episode
+                this.posterUrl = if (epThumb.contains("svg")) null else epThumb
+            }
         }
-        return when (val tvType =
-            if (url.contains("/ver-pelicula/")) TvType.Movie else TvType.TvSeries) {
-            TvType.TvSeries -> {
-                TvSeriesLoadResponse(
-                    title,
-                    url,
-                    this.name,
-                    tvType,
-                    episodes,
-                    poster,
-                    null,
-                    description,
-                )
+        val tvType = if (url.contains("/ver-pelicula/")) TvType.Movie else TvType.TvSeries
+        
+        return if (tvType == TvType.TvSeries) {
+            newTvSeriesLoadResponse(title, url, tvType, episodes) {
+                this.posterUrl = poster
+                this.plot = description
             }
-            TvType.Movie -> {
-                MovieLoadResponse(
-                    title,
-                    url,
-                    this.name,
-                    tvType,
-                    url,
-                    poster,
-                    null,
-                    description,
-                )
+        } else {
+            newMovieLoadResponse(title, url, tvType, url) {
+                this.posterUrl = poster
+                this.plot = description
             }
-            else -> null
         }
     }
 
@@ -145,9 +113,11 @@ class CinecalidadProvider : MainAPI() {
     ): Boolean {
          val capturedLinks = Collections.synchronizedList(ArrayList<ExtractorLink>())
          
-         app.get(data).document.select(".linklist ul li").apmap {
+         app.get(data).document.select(".linklist ul li").forEach {
              val url = it.select("li").attr("data-option")
-             loadExtractor(url, mainUrl, subtitleCallback) { l -> capturedLinks.add(l) }
+             if (url.isNotEmpty()) {
+                loadExtractor(url, mainUrl, subtitleCallback) { l -> capturedLinks.add(l) }
+             }
          }
 
          // Strict Filtering
@@ -158,7 +128,7 @@ class CinecalidadProvider : MainAPI() {
              !it.name.contains("Spain", true)
          }
          
-         // 2. Latino check - prioritizing
+         // 2. Latino check - prioritized
          val hasLatino = allowedLinks.any { it.name.contains("Latino", true) || it.name.contains("LAT", true) }
          
          val finalLinks = if (hasLatino) {

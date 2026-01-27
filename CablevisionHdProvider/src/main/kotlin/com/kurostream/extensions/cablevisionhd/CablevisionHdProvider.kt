@@ -5,6 +5,7 @@ import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.utils.ExtractorLink
 import com.lagradost.cloudstream3.utils.JsUnpacker
 import com.lagradost.cloudstream3.utils.getQualityFromName
+import com.lagradost.cloudstream3.utils.newExtractorLink
 import java.net.URL
 import java.util.Collections
 
@@ -78,6 +79,13 @@ class CablevisionHdProvider : MainAPI() {
             "Fox Sports Mexico",
             "Fox Sports 2 Mexico",
             "Fox Sports 3 Mexico",
+            "Fox Sports Premium Mexico",
+            "Fox Sports Premium",
+            "F1 TV",
+            "Golf Channel",
+            "NBA TV",
+            "MLB Network",
+            "NFL Network",
     )
 
     val entretenimientoCat = setOf(
@@ -101,10 +109,42 @@ class CablevisionHdProvider : MainAPI() {
             "Azteca Uno",
             "Canal 5",
             "Distrito Comedia",
+            "Comedy Central",
+            "A&E",
+            "Lifetime",
+            "E! Entertainment",
+            "Discovery H&H",
+            "Food Network",
+            "HGTV",
+            "TLC",
+            "ID",
+            "Discovery Channel",
+            "Discovery World",
+            "Discovery Theater",
+            "Discovery Science",
+            "Discovery Familia",
+            "History",
+            "History 2",
+            "Animal Planet",
+            "Nat Geo",
+            "Nat Geo Mundo",
     )
 
     val noticiasCat = setOf(
             "Telemundo 51",
+            "CNN en Español",
+            "CNN Chile",
+            "Fox News",
+            "BBC World News",
+            "RT en Español",
+            "Telesur",
+            "Mileno TV",
+            "Foro TV",
+            "N+",
+            "C5N",
+            "TN",
+            "Crónica TV",
+            "A24",
     )
 
     val peliculasCat = setOf(
@@ -135,6 +175,14 @@ class CablevisionHdProvider : MainAPI() {
             "Sony",
             "DHE",
             "NEXT HD",
+            "HBO",
+            "HBO 2",
+            "HBO Family",
+            "HBO Plus",
+            "HBO Signature",
+            "HBO Mundi",
+            "HBO Pop",
+            "HBO Xtreme",
     )
 
     val infantilCat = setOf(
@@ -144,19 +192,10 @@ class CablevisionHdProvider : MainAPI() {
             "Disney Channel",
             "Disney JR",
             "Nick",
-    )
-
-    val educacionCat = setOf(
-            "Discovery Channel",
-            "Discovery World",
-            "Discovery Theater",
-            "Discovery Science",
-            "Discovery Familia",
-            "History",
-            "History 2",
-            "Animal Planet",
-            "Nat Geo",
-            "Nat Geo Mundo",
+            "Nick Jr",
+            "Discovery Kids",
+            "Boomerang",
+            "Nat Geo Kids",
     )
 
     val dos47Cat = setOf(
@@ -175,137 +214,75 @@ class CablevisionHdProvider : MainAPI() {
                 Pair("24/7", mainUrl),
                 Pair("Todos", mainUrl),
         )
-        urls.apmap { (name, url) ->
-            val doc = app.get(url).document
-            val home = doc.select("div.page-scroll div#page_container.page-container.bg-move-effect div div#canales.row div.canal-item.col-6.col-xs-6.col-sm-6.col-md-3.col-lg-3").filterNot { element ->
-                val text = element.selectFirst("div.lm-canal.lm-info-block.gray-default a h4")?.text()
-                        ?: ""
+        val doc = app.get(mainUrl).document
+        val elements = doc.select("div.canal-item")
+        
+        urls.forEach { (name, url) ->
+            val home = elements.filterNot { element ->
+                val text = element.selectFirst("h4")?.text() ?: ""
                 nowAllowed.any {
                     text.contains(it, ignoreCase = true)
                 } || text.isBlank()
             }.filter {
-                val text = it.selectFirst("div.lm-canal.lm-info-block.gray-default a h4")?.text()?.trim()
-                        ?: ""
+                val text = it.selectFirst("h4")?.text()?.trim() ?: ""
                 when (name) {
-                    "Deportes" -> {
-                        deportesCat.any {
-                            text.equals(it, ignoreCase = true)
-                        }
-                    }
-
-                    "Entretenimiento" -> {
-                        entretenimientoCat.any {
-                            text.equals(it, ignoreCase = true)
-                        }
-                    }
-
-                    "Noticias" -> {
-                        noticiasCat.any {
-                            text.equals(it, ignoreCase = true)
-                        }
-                    }
-
-                    "Peliculas" -> {
-                        peliculasCat.any {
-                            text.equals(it, ignoreCase = true)
-                        }
-                    }
-
-                    "Infantil" -> {
-                        infantilCat.any {
-                            text.equals(it, ignoreCase = true)
-                        }
-                    }
-
-                    "Educacion" -> {
-                        educacionCat.any {
-                            text.equals(it, ignoreCase = true)
-                        }
-                    }
-
-                    "24/7" -> {
-                        dos47Cat.any {
-                            text.contains(it, ignoreCase = true)
-                        }
-                    }
-
+                    "Deportes" -> deportesCat.any { cat -> text.equals(cat, ignoreCase = true) }
+                    "Entretenimiento" -> entretenimientoCat.any { cat -> text.equals(cat, ignoreCase = true) }
+                    "Noticias" -> noticiasCat.any { cat -> text.equals(cat, ignoreCase = true) }
+                    "Peliculas" -> peliculasCat.any { cat -> text.equals(cat, ignoreCase = true) }
+                    "Infantil" -> infantilCat.any { cat -> text.equals(cat, ignoreCase = true) }
+                    // Reusing entretenimientoCat for Educacion as it was mixed in original
+                    "Educacion" -> entretenimientoCat.any { cat -> text.equals(cat, ignoreCase = true) } 
+                    "24/7" -> text.contains("24/7", ignoreCase = true)
                     "Todos" -> true
                     else -> true
                 }
             }.map {
-                val title = it.selectFirst("div.lm-canal.lm-info-block.gray-default a h4")?.text()
-                        ?: ""
-                val img = it.selectFirst("div.lm-canal.lm-info-block.gray-default a div.container-image img")?.attr("src")
-                        ?: ""
-                val link = it.selectFirst("div.lm-canal.lm-info-block.gray-default a")?.attr("href")
-                        ?: ""
-                LiveSearchResponse(
-                        title,
-                        link,
-                        this.name,
-                        TvType.Live,
-                        fixUrl(img),
-                        null,
-                        null,
-                )
+                val title = it.selectFirst("h4")?.text() ?: ""
+                val img = it.selectFirst("img")?.attr("src") ?: ""
+                val link = it.selectFirst("a")?.attr("href") ?: ""
+                newLiveSearchResponse(title, link, TvType.Live) {
+                    this.posterUrl = fixUrl(img)
+                }
             }
-            items.add(HomePageList(name, home, true))
+            if (home.isNotEmpty()) {
+                items.add(HomePageList(name, home, true))
+            }
         }
 
-        return HomePageResponse(items)
+        return newHomePageResponse(items)
     }
 
     override suspend fun search(query: String): List<SearchResponse> {
-        val url = mainUrl
-        val doc = app.get(url).document
-        return doc.select("div.page-scroll div#page_container.page-container.bg-move-effect div div#canales.row div.canal-item.col-6.col-xs-6.col-sm-6.col-md-3.col-lg-3").filterNot { element ->
-            val text = element.selectFirst("div.lm-canal.lm-info-block.gray-default a h4")?.text()
-                    ?: ""
+        val doc = app.get(mainUrl).document
+        return doc.select("div.canal-item").filterNot { element ->
+            val text = element.selectFirst("h4")?.text() ?: ""
             nowAllowed.any {
                 text.contains(it, ignoreCase = true)
             } || text.isBlank()
         }.filter { element ->
-            element.selectFirst("div.lm-canal.lm-info-block.gray-default a h4")?.text()?.contains(query, ignoreCase = true)
-                    ?: false
+            element.selectFirst("h4")?.text()?.contains(query, ignoreCase = true) ?: false
         }.map {
-            val title = it.selectFirst("div.lm-canal.lm-info-block.gray-default a h4")?.text()
-                    ?: ""
-            val img = it.selectFirst("div.lm-canal.lm-info-block.gray-default a div.container-image img")?.attr("src")
-                    ?: ""
-            val link = it.selectFirst("div.lm-canal.lm-info-block.gray-default a")?.attr("href")
-                    ?: ""
-            LiveSearchResponse(
-                    title,
-                    link,
-                    this.name,
-                    TvType.Live,
-                    fixUrl(img),
-                    null,
-                    null,
-            )
+            val title = it.selectFirst("h4")?.text() ?: ""
+            val img = it.selectFirst("img")?.attr("src") ?: ""
+            val link = it.selectFirst("a")?.attr("href") ?: ""
+            newLiveSearchResponse(title, link, TvType.Live) {
+                this.posterUrl = fixUrl(img)
+            }
         }
     }
 
     override suspend fun load(url: String): LoadResponse {
         val doc = app.get(url).document
-        val poster = doc.selectFirst("div.page-scroll div#page_container.page-container.bg-move-effect div.block-title div.block-title div.section.mt-2 div.card.bg-dark.text-white div.card-body img")?.attr("src")?.replace(Regex("\\/p\\/w\\d+.*\\/"), "/p/original/")
-                ?: ""
-        val title = doc.selectFirst("div.page-scroll div#page_container.page-container.bg-move-effect div.block-title h2")?.text()
-                ?: ""
-        val desc = doc.selectFirst("div.page-scroll div#page_container.page-container.bg-move-effect div.block-title div.block-title div.section.mt-2 div.card.bg-dark.text-white div.card-body div.info")?.text()
-                ?: ""
+        val poster = doc.selectFirst("div.card-body img")?.attr("src")?.replace(Regex("\\/p\\/w\\d+.*\\/"), "/p/original/") ?: ""
+        val title = doc.selectFirst("div.block-title h2")?.text() ?: ""
+        val desc = doc.selectFirst("div.card-body div.info")?.text() ?: ""
 
-        return newMovieLoadResponse(
-                title,
-                url, TvType.Live, url
-        ) {
+        return newMovieLoadResponse(title, url, TvType.Live, url) {
             this.posterUrl = fixUrl(poster)
-            this.backgroundPosterUrl = fixUrl(poster)
             this.plot = desc
         }
-
     }
-
 
     override suspend fun loadLinks(
             data: String,
@@ -314,19 +291,20 @@ class CablevisionHdProvider : MainAPI() {
             callback: (ExtractorLink) -> Unit
     ): Boolean {
         val capturedLinks = Collections.synchronizedList(ArrayList<ExtractorLink>())
-        
-        app.get(data).document.select("a.btn.btn-md").apmap {
+        val doc = app.get(data).document
+        val btnElements = doc.select("a.btn.btn-md")
+
+        for (it in btnElements) {
             val trembedlink = it.attr("href")
             if (trembedlink.contains("/stream")) {
                 val tremrequest = app.get(trembedlink, headers = mapOf(
                         "Host" to "www.cablevisionhd.com",
-                        "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0",
+                        "User-Agent" to USER_AGENT,
                         "Accept" to "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
                         "Accept-Language" to "en-US,en;q=0.5",
                         "Referer" to data,
                         "Alt-Used" to "www.cablevisionhd.com",
                         "Connection" to "keep-alive",
-                        "Cookie" to "TawkConnectionTime=0; twk_idm_key=qMfE5UE9JTs3JUBCtVUR1",
                         "Upgrade-Insecure-Requests" to "1",
                         "Sec-Fetch-Dest" to "iframe",
                         "Sec-Fetch-Mode" to "navigate",
@@ -334,7 +312,7 @@ class CablevisionHdProvider : MainAPI() {
                 )).document
                 val trembedlink2 = tremrequest.selectFirst("iframe")?.attr("src") ?: ""
                 val tremrequest2 = app.get(trembedlink2, headers = mapOf(
-                        "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0",
+                        "User-Agent" to USER_AGENT,
                         "Accept" to "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
                         "Accept-Language" to "en-US,en;q=0.5",
                         "Referer" to mainUrl,
@@ -344,7 +322,7 @@ class CablevisionHdProvider : MainAPI() {
                         "Sec-Fetch-Mode" to "navigate",
                         "Sec-Fetch-Site" to "cross-site",
                 )).document
-                val scriptPacked = tremrequest2.select("script").find { it.html().contains("function(p,a,c,k,e,d)") }?.html()
+                val scriptPacked = tremrequest2.select("script").find { s -> s.html().contains("function(p,a,c,k,e,d)") }?.html()
                 val script = JsUnpacker(scriptPacked)
                 if (script.detect()) {
                     val regex = """MARIOCSCryptOld\("(.*?)"\)""".toRegex()
@@ -352,15 +330,17 @@ class CablevisionHdProvider : MainAPI() {
                     val hash = match?.groupValues?.get(1) ?: ""
                     val extractedurl = decodeBase64UntilUnchanged(hash)
                     if (extractedurl.isNotBlank()) {
+                        val finalName = it.text() ?: getHostUrl(extractedurl)
                         capturedLinks.add(
-                            ExtractorLink(
-                                    it.text() ?: getHostUrl(extractedurl),
-                                    it.text() ?: getHostUrl(extractedurl),
+                            newExtractorLink(
+                                    finalName,
+                                    finalName,
                                     extractedurl,
-                                    "${getBaseUrl(extractedurl)}/",
-                                    getQualityFromName(""),
-                                    extractedurl.contains("m3u8")
-                            )
+                                    null
+                            ) {
+                                this.referer = "${getBaseUrl(extractedurl)}/"
+                                this.quality = getQualityFromName("")
+                            }
                         )
                     }
                 }
@@ -368,21 +348,17 @@ class CablevisionHdProvider : MainAPI() {
         }
         
         // Strict Filtering for Live TV
-        // 1. Block Prohibited
         val allowedLinks = capturedLinks.filter {
              !it.name.contains("Castellano", true) &&
              !it.name.contains("España", true) &&
              !it.name.contains("Spain", true)
         }
         
-        // 2. Latino check - prioritized
         val hasLatino = allowedLinks.any { it.name.contains("Latino", true) || it.name.contains("LAT", true) }
         
         val finalLinks = if (hasLatino) {
             allowedLinks.filter { it.name.contains("Latino", true) || it.name.contains("LAT", true) }
         } else {
-            // Live TV usually doesn't have "Subbed" in the same way movies do.
-            // If it's not blocked, we allow it.
             allowedLinks
         }
         
@@ -392,12 +368,20 @@ class CablevisionHdProvider : MainAPI() {
     }
 
     fun getBaseUrl(urlString: String): String {
-        val url = URL(urlString)
-        return "${url.protocol}://${url.host}"
+        return try {
+            val url = URL(urlString)
+            "${url.protocol}://${url.host}"
+        } catch (e: Exception) {
+            ""
+        }
     }
 
     fun getHostUrl(urlString: String): String {
-        val url = URL(urlString)
-        return url.host
+        return try {
+            val url = URL(urlString)
+            url.host
+        } catch (e: Exception) {
+            ""
+        }
     }
 }

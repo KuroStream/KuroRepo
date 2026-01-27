@@ -23,7 +23,7 @@ class LACartoonsProvider:MainAPI() {
             val title = it.selectFirst("p.nombre-serie")?.text() ?: return@mapNotNull null
             val href = fixUrl(it.attr("href"))
             val img = fixUrl(it.selectFirst("img")?.attr("src") ?: "")
-            newTvSeriesSearchResponse(title, href) {
+            newTvSeriesSearchResponse(title, href, TvType.TvSeries) {
                 this.posterUrl = img
             }
         }
@@ -77,7 +77,8 @@ class LACartoonsProvider:MainAPI() {
         val capturedLinks = Collections.synchronizedList(ArrayList<ExtractorLink>())
         
         val res = app.get(data).document
-        res.select(".serie-video-informacion iframe").forEach {
+        val elements = res.select(".serie-video-informacion iframe")
+        for (it in elements) {
             val link = it.attr("src")?.replace("https://short.ink/","https://abysscdn.com/?v=")
             if (link != null) {
                 loadExtractor(link, data, subtitleCallback) { l -> capturedLinks.add(l) }
@@ -85,25 +86,22 @@ class LACartoonsProvider:MainAPI() {
         }
         
         // Strict Filtering
-        // 1. Block Prohibited
         val allowedLinks = capturedLinks.filter {
              !it.name.contains("Castellano", true) &&
              !it.name.contains("España", true) &&
              !it.name.contains("Spain", true)
         }
         
-        // 2. Latino check - prioritized
         val hasLatino = allowedLinks.any { it.name.contains("Latino", true) || it.name.contains("LAT", true) }
         
         val finalLinks = if (hasLatino) {
             allowedLinks.filter { it.name.contains("Latino", true) || it.name.contains("LAT", true) }
         } else {
-            // 3. Fallback: Allow Subtitled
             allowedLinks
         }
         
         finalLinks.forEach(callback)
-
+        
         return true
     }
 }

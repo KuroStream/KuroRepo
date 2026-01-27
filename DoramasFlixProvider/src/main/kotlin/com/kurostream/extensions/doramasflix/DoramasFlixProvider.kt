@@ -6,6 +6,7 @@ import com.lagradost.cloudstream3.utils.AppUtils.parseJson
 import com.lagradost.cloudstream3.utils.AppUtils.toJson
 import com.lagradost.cloudstream3.utils.ExtractorLink
 import com.lagradost.cloudstream3.utils.loadExtractor
+import com.lagradost.cloudstream3.utils.newExtractorLink
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.util.Collections
@@ -119,7 +120,7 @@ class DoramasFlixProvider:MainAPI() {
         return if (link.startsWith("/")) "https://image.tmdb.org/t/p/w1280/$link" else link
     }
 
-    override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse? {
+    override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val items = ArrayList<HomePageList>()
         val doramasBody = "{\"operationName\":\"listDoramasMobile\",\"variables\":{\"filter\":{\"isTVShow\":false},\"limit\":32,\"sort\":\"_ID_DESC\"},\"query\":\"query listDoramasMobile(\$limit: Int, \$skip: Int, \$sort: SortFindManyDoramaInput, \$filter: FilterFindManyDoramaInput) {\\n  listDoramas(limit: \$limit, skip: \$skip, sort: \$sort, filter: \$filter) {\\n    _id\\n    name\\n    name_es\\n    slug\\n    poster_path\\n    isTVShow\\n    poster\\n    __typename\\n  }\\n}\\n\"}"
         val peliculasBody = "{\"operationName\":\"paginationMovie\",\"variables\":{\"perPage\":32,\"sort\":\"CREATEDAT_DESC\",\"filter\":{},\"page\":1},\"query\":\"query paginationMovie(\$page: Int, \$perPage: Int, \$sort: SortFindManyMovieInput, \$filter: FilterFindManyMovieInput) {\\n  paginationMovie(page: \$page, perPage: \$perPage, sort: \$sort, filter: \$filter) {\\n    count\\n    pageInfo {\\n      currentPage\\n      hasNextPage\\n      hasPreviousPage\\n      __typename\\n    }\\n    items {\\n      _id\\n      name\\n      name_es\\n      slug\\n      names\\n      poster_path\\n      poster\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"}"
@@ -144,7 +145,7 @@ class DoramasFlixProvider:MainAPI() {
         items.add(HomePageList("Peliculas", home2!!))
         items.add(HomePageList("Doramas 2", home3!!))
         if (items.size <= 0) throw ErrorLoadingException()
-        return HomePageResponse(items)
+        return newHomePageResponse(items)
     }
 
     private fun tasa(
@@ -159,13 +160,9 @@ class DoramasFlixProvider:MainAPI() {
         val istvShow = info.isTVShow
         val data = "{\"id\":\"$id\",\"slug\":\"$slug\",\"type\":\"$typename\",\"isTV\":$istvShow}"
 
-        return TvSeriesSearchResponse(
-            title!!,
-            data,
-            name,
-            TvType.AsianDrama,
-            realposter,
-        )
+        return newTvSeriesSearchResponse(title!!, data, TvType.AsianDrama) {
+            this.posterUrl = realposter
+        }
     }
 
     override suspend fun search(query: String): List<SearchResponse> {
@@ -174,11 +171,13 @@ class DoramasFlixProvider:MainAPI() {
         val response = app.post(doraflixapi, requestBody = bodyjson.toRequestBody(mediaType)).parsed<MainDoramas>()
         val searchDorama = response.data?.searchDorama
         val searchMovie = response.data?.searchMovie
-        if (searchDorama!!.isNotEmpty() || searchMovie!!.isNotEmpty())  {
+        if (searchDorama!!.isNotEmpty())  {
             searchDorama.map { info->
                 search.add(tasa(info))
             }
-            searchMovie?.map {info ->
+        }
+        if (searchMovie != null && searchMovie.isNotEmpty()) {
+            searchMovie.map {info ->
                 search.add(tasa(info))
             }
         }
@@ -204,8 +203,8 @@ class DoramasFlixProvider:MainAPI() {
         val backgroundPosterinfo = metaInfo?.backdrop ?: metaInfo?.backdropPath ?: ""
         val bgposter = getImageUrl(backgroundPosterinfo)
         val tags = ArrayList<String>()
-        val tags1 = metaInfo?.genres?.map { tags.add(it.name!!) }
-        val tags2 = metaInfo?.labels?.map { tags.add(it.name!!) }
+        metaInfo?.genres?.map { tags.add(it.name!!) }
+        metaInfo?.labels?.map { tags.add(it.name!!) }
         val episodes = ArrayList<Episode>()
         var movieData: String? = ""
         val datatwo = "{\"id\":\"${parse.id}\",\"slug\":\"${parse.slug}\",\"type\":\"${parse.type}\",\"isTV\":${parse.isTV}}"
@@ -224,13 +223,12 @@ class DoramasFlixProvider:MainAPI() {
                     val epthumb = getImageUrl(it.stillPath)
                     val name = it.name
                     episodes.add(
-                        Episode(
-                            epSlug!!,
-                            name,
-                            season,
-                            epnum,
-                            epthumb
-                        ))
+                        newEpisode(epSlug!!) {
+                            this.name = name
+                            this.season = season
+                            this.episode = epnum
+                            this.posterUrl = epthumb
+                        })
                 }
             }
         } else if (isMovie) {
@@ -248,7 +246,7 @@ class DoramasFlixProvider:MainAPI() {
                 }
             }
             TvType.Movie -> {
-                newMovieLoadResponse(title!!, datatwo, tvType, movieData){
+                newMovieLoadResponse(title!!, datatwo, tvType, movieData ?: ""){
                     this.posterUrl = poster
                     this.plot = plot
                     this.backgroundPosterUrl = bgposter
@@ -260,6 +258,16 @@ class DoramasFlixProvider:MainAPI() {
 
     }
 
+    data class TempLink(
+        val source: String,
+        val name: String,
+        val url: String,
+        val referer: String,
+        val quality: Int,
+        val isM3u8: Boolean,
+        val headers: Map<String, String>,
+        val extractorData: String?
+    )
 
     override suspend fun loadLinks(
         data: String,
@@ -267,53 +275,76 @@ class DoramasFlixProvider:MainAPI() {
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit
     ): Boolean {
-        val capturedLinks = Collections.synchronizedList(ArrayList<ExtractorLink>())
+        val capturedLinksData = Collections.synchronizedList(ArrayList<TempLink>())
         
         if (data.contains("link")) {
             val parse = parseJson<List<LinksOnline>>(data)
-            parse.apmap {
-                val link = it.link
-                val lang = it.lang ?: "" // Extract language info
-                loadExtractor(link!!, subtitleCallback) { l -> 
-                    // Add language to name if not present
-                    if (!l.name.contains(lang, true)) {
-                        capturedLinks.add(l.copy(name = "${l.name} ($lang)"))
-                    } else {
-                        capturedLinks.add(l)
+            for (item in parse) {
+                val link = item.link
+                val lang = item.lang ?: ""
+                if (!link.isNullOrEmpty()) {
+                    loadExtractor(link, subtitleCallback) { l -> 
+                        val finalName = if (!l.name.contains(lang, true)) "${l.name} ($lang)" else l.name
+                        capturedLinksData.add(
+                            TempLink(
+                                l.source, finalName, l.url, l.referer, l.quality, l.isM3u8, l.headers, l.extractorData
+                            )
+                        )
                     }
                 }
             }
         } else {
             val episodeslinkRequestbody = "{\"operationName\":\"GetEpisodeLinks\",\"variables\":{\"episode_slug\":\"$data\"},\"query\":\"query GetEpisodeLinks(\$episode_slug: String!) {\\n  detailEpisode(filter: {slug: \$episode_slug, type_serie: \\\"dorama\\\"}) {\\n    links_online\\n   }\\n}\\n\"}"
             val request = app.post(doraflixapi, requestBody = episodeslinkRequestbody.toRequestBody(mediaType)).parsedSafe<MainDoramas>()
-            request?.data?.detailEpisode?.linksOnline?.apmap {
-                val link = it.link?.replace("https://swdyu.com","https://streamwish.to")?.replace("https://uqload.to","https://uqload.co")
-                val lang = it.lang ?: ""
-                loadExtractor(link!!, subtitleCallback) { l -> 
-                    if (!l.name.contains(lang, true)) {
-                        capturedLinks.add(l.copy(name = "${l.name} ($lang)"))
-                    } else {
-                        capturedLinks.add(l)
+            val links = request?.data?.detailEpisode?.linksOnline
+            if (links != null) {
+                for (item in links) {
+                    val link = item.link?.replace("https://swdyu.com","https://streamwish.to")?.replace("https://uqload.to","https://uqload.co")
+                    val lang = item.lang ?: ""
+                    if (!link.isNullOrEmpty()) {
+                        loadExtractor(link, subtitleCallback) { l -> 
+                            val finalName = if (!l.name.contains(lang, true)) "${l.name} ($lang)" else l.name
+                            capturedLinksData.add(
+                                TempLink(
+                                    l.source, finalName, l.url, l.referer, l.quality, l.isM3u8, l.headers, l.extractorData
+                                )
+                            )
+                        }
                     }
                 }
             }
         }
+
+        val capturedLinks = ArrayList<ExtractorLink>()
+        for (l in capturedLinksData) {
+            capturedLinks.add(
+                newExtractorLink(
+                    l.source,
+                    l.name,
+                    l.url,
+                    null
+                ) {
+                    this.referer = l.referer
+                    this.quality = l.quality
+                    // Not setting isM3u8 if it's val and can't be set
+                    this.headers = l.headers
+                    this.extractorData = l.extractorData
+                }
+            )
+        }
         
         // Strict Filtering
-        // 1. Block Prohibited
         val allowedLinks = capturedLinks.filter {
              !it.name.contains("Castellano", true) &&
              !it.name.contains("España", true) &&
              !it.name.contains("Spain", true)
         }
         
-        // 2. Latino check - prioritized
         val hasLatino = allowedLinks.any { it.name.contains("Latino", true) || it.name.contains("LAT", true) }
         
         val finalLinks = if (hasLatino) {
             allowedLinks.filter { it.name.contains("Latino", true) || it.name.contains("LAT", true) }
         } else {
-            // 3. Fallback: Allow Subtitled
             allowedLinks
         }
         

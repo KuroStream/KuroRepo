@@ -7,6 +7,7 @@ import com.lagradost.cloudstream3.utils.ExtractorLink
 import com.lagradost.cloudstream3.utils.M3u8Helper.Companion.generateM3u8
 import com.lagradost.cloudstream3.utils.Qualities
 import com.lagradost.cloudstream3.utils.loadExtractor
+import com.lagradost.cloudstream3.utils.newExtractorLink
 import java.util.Collections
 
 class AnimensionProvider:MainAPI() {
@@ -27,7 +28,7 @@ class AnimensionProvider:MainAPI() {
             Pair("Animes (SUB)","$mainUrl/public-api/index.php?page=1&mode=sub"),
             Pair("Animes (DUB)","$mainUrl/public-api/index.php?page=1&mode=dub"),
         )
-        links.apmap { (name, url) ->
+        links.forEach { (name, url) ->
             val test = app.get(url).parsed<HomeInfo>()
             val sub = name.contains("(SUB)")
             val dub = name.contains("(DUB)")
@@ -47,13 +48,13 @@ class AnimensionProvider:MainAPI() {
             }
             items.add(HomePageList(name, home))
         }
-        return HomePageResponse(items)
+        return newHomePageResponse(items)
     }
 
     override suspend fun search(query: String): List<SearchResponse> {
         val search = ArrayList<SearchResponse>()
         val re = app.get( "$mainUrl/public-api/search.php?search_text=$query&page=1").parsed<HomeInfo>()
-        re.map {
+        re.forEach {
             val title = it[0]
             val id = it[1]
             val img = it[2]
@@ -81,10 +82,9 @@ class AnimensionProvider:MainAPI() {
             val epid = it[1]
             val epnum = it[2]
             val epinfo = "$mainUrl/public-api/episode.php?id=$epid"
-            Episode(
-                epinfo,
-                episode = epnum.toString().toIntOrNull()
-            )
+            newEpisode(epinfo) {
+                this.episode = epnum.toString().toIntOrNull()
+            }
         }
         return newAnimeLoadResponse(title, url, TvType.Anime){
             addEpisodes(DubStatus.Subbed, episodes)
@@ -126,9 +126,8 @@ class AnimensionProvider:MainAPI() {
         
         val capturedLinks = Collections.synchronizedList(ArrayList<ExtractorLink>())
         
-        list.apmap {
-            val link = it.replace("https://streamsss.net","https://watchsb.com").replace("https://fembed9hd.com","https://embedsito.com")
-            //println(link)
+        for (item in list) {
+            val link = item.replace("https://streamsss.net","https://watchsb.com").replace("https://fembed9hd.com","https://embedsito.com")
             if (link.contains("m3u8")) {
                 generateM3u8(
                     "${this.name} DirectHLS",
@@ -139,14 +138,14 @@ class AnimensionProvider:MainAPI() {
             else if (link.contains(Regex("mp4\$")))
             {
                 capturedLinks.add(
-                    ExtractorLink(
+                    newExtractorLink(
                         this.name,
                         "${this.name} MP4",
                         link,
-                        "",
-                        Qualities.Unknown.value,
-                        isM3u8 = false
-                    )
+                        null
+                    ) {
+                        this.quality = Qualities.Unknown.value
+                    }
                 )
             }
             else {
@@ -169,21 +168,7 @@ class AnimensionProvider:MainAPI() {
             allowedLinks.filter { it.name.contains("Latino", true) || it.name.contains("LAT", true) }
         } else {
             // 3. Exception: Anime allows Subtitled.
-            // Animension is Anime.
-            // Filter TO exclude English Dub if we want to be strict "SOLO Latino... Excepción Subtitulado".
-            // If it's English Dub, it's not Latino, and it's not Subtitled (it's Dubbed).
-            // So we block English Dub?
-            // "Excepción: permite 'Subtitulado' únicamente si no existe versión doblada al latino."
-            // This is the rule.
-            
-            // We assume links without "Dub" in name are Sub/Raw?
-            // Or explicit "Sub" check.
-            // However, ExtractorLink name often is just "Server Name".
-            // In Animension, we control the name somewhat: "${this.name} DirectHLS", "${this.name} MP4".
-            // The `loadExtractor` ones call the extractor which names it.
-            // If we can't tell, we default to allow.
-            
-            allowedLinks // Allow acceptable fallbacks (likely Subbed).
+            allowedLinks // Allow fallbacks (Subbed).
         }
         
         finalLinks.forEach(callback)

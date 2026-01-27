@@ -51,7 +51,7 @@ class DoramasYTProvider : MainAPI() {
             Pair("$mainUrl/doramas?categoria=pelicula", "Peliculas")
         )
         val items = ArrayList<HomePageList>()
-        var isHorizontal = true
+        val isHorizontal = true
         items.add(
             HomePageList(
                 "Capítulos actualizados",
@@ -69,7 +69,7 @@ class DoramasYTProvider : MainAPI() {
                 }, isHorizontal)
         )
 
-        urls.apmap { (url, name) ->
+        urls.forEach { (url, name) ->
             val home = app.get(url).document.select("li.col").map {
                 val title = it.selectFirst("h3")!!.text()
                 val poster = it.selectFirst("img")!!.attr("data-src")
@@ -81,8 +81,7 @@ class DoramasYTProvider : MainAPI() {
             items.add(HomePageList(name, home))
         }
 
-        if (items.size <= 0) throw ErrorLoadingException()
-        return HomePageResponse(items)
+        return newHomePageResponse(items)
     }
 
     override suspend fun search(query: String): List<SearchResponse> {
@@ -90,17 +89,10 @@ class DoramasYTProvider : MainAPI() {
             val title = it.selectFirst("h3")!!.text()
             val href = it.selectFirst("a")!!.attr("href")
             val image = it.selectFirst("img")!!.attr("data-src")
-            AnimeSearchResponse(
-                title,
-                href,
-                this.name,
-                TvType.AsianDrama,
-                image,
-                null,
-                if (title.contains("Latino") || title.contains("Castellano")) EnumSet.of(
-                    DubStatus.Dubbed
-                ) else EnumSet.of(DubStatus.Subbed),
-            )
+            newAnimeSearchResponse(title, href, TvType.AsianDrama) {
+                this.posterUrl = image
+                addDubStatus(getDubStatus(title))
+            }
         }
     }
 
@@ -176,12 +168,14 @@ class DoramasYTProvider : MainAPI() {
     ): Boolean {
         val capturedLinks = Collections.synchronizedList(ArrayList<ExtractorLink>())
         
-        app.get(data).document.select("#myTab li").apmap {
+        app.get(data).document.select("#myTab li").forEach {
             val encodedurl = it.select(".play-video").attr("data-player")
-            val urlDecoded = base64Decode(encodedurl)
-            val url = (urlDecoded).replace("https://monoschinos2.com/reproductor?url=", "")
-                    .replace("https://sblona.com","https://watchsb.com").replace("https://swdyu.com","https://streamwish.to")
-            loadExtractor(url, subtitleCallback) { l -> capturedLinks.add(l) }
+            if (encodedurl.isNotBlank()) {
+                val urlDecoded = base64Decode(encodedurl)
+                val url = (urlDecoded).replace("https://monoschinos2.com/reproductor?url=", "")
+                        .replace("https://sblona.com","https://watchsb.com").replace("https://swdyu.com","https://streamwish.to")
+                loadExtractor(url, subtitleCallback) { l -> capturedLinks.add(l) }
+            }
         }
         
         // Strict Filtering

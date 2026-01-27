@@ -61,7 +61,8 @@ class AnimeflvnetProvider : MainAPI() {
                 }, isHorizontal)
         )
 
-        urls.apmap { (url, name) ->
+        for (item in urls) {
+            val (url, name) = item
             val doc = app.get(url).document
             val home = doc.select("ul.ListAnimes li article").mapNotNull {
                 val title = it.selectFirst("h3.Title")?.text() ?: return@mapNotNull null
@@ -77,8 +78,8 @@ class AnimeflvnetProvider : MainAPI() {
 
             items.add(HomePageList(name, home))
         }
-        if (items.size <= 0) throw ErrorLoadingException()
-        return HomePageResponse(items)
+
+        return newHomePageResponse(items)
     }
 
     data class SearchObject(
@@ -134,23 +135,17 @@ class AnimeflvnetProvider : MainAPI() {
         val genre = doc.select("nav.Nvgnrs a")
             .map { it?.text()?.trim().toString() }
 
-        doc.select("script").map { script ->
+        doc.select("script").forEach { script ->
             if (script.data().contains("var episodes = [")) {
                 val data = script.data().substringAfter("var episodes = [").substringBefore("];")
                 data.split("],").forEach {
 
                     val epNum = it.removePrefix("[").substringBefore(",")
-                    // val epthumbid = it.removePrefix("[").substringAfter(",").substringBefore("]")
-                    val animeid = doc.selectFirst("div.Strs.RateIt")?.attr("data-id")
-                    //val epthumb = "https://cdn.animeflv.net/screenshots/$animeid/$epNum/th_3.jpg"
                     val link = url.replace("/anime/", "/ver/") + "-$epNum"
                     episodes.add(
-                        Episode(
-                            link,
-                            null,
-                            //posterUrl = epthumb,
-                            episode = epNum.toIntOrNull()
-                        )
+                        newEpisode(link) {
+                            this.episode = epNum.toIntOrNull()
+                        }
                     )
                 }
             }
@@ -182,24 +177,26 @@ class AnimeflvnetProvider : MainAPI() {
     ): Boolean {
         val capturedLinks = java.util.Collections.synchronizedList(ArrayList<ExtractorLink>())
 
-        app.get(data).document.select("script").apmap { script ->
+        val scriptElements = app.get(data).document.select("script")
+        for (script in scriptElements) {
             if (script.data().contains("var videos = {") || script.data()
                     .contains("var anime_id =") || script.data().contains("server")
             ) {
                 val serversRegex = Regex("var videos = (\\{\"SUB\":\\[\\{.*?\\}\\]\\});")
                 val serversplain = serversRegex.find(script.data())?.destructured?.component1() ?: ""
-                val json = parseJson<MainServers>(serversplain)
-                json.sub.apmap {
-                    val code = it.code
-                    loadExtractor(code, data, subtitleCallback) { link ->
-                        capturedLinks.add(link)
+                if (serversplain.isNotBlank()) {
+                    val json = parseJson<MainServers>(serversplain)
+                    for (item in json.sub) {
+                        val code = item.code
+                        loadExtractor(code, data, subtitleCallback) { link ->
+                            capturedLinks.add(link)
+                        }
                     }
                 }
             }
         }
         
         // Strict Filtering Logic
-        // 1. Block prohibited
         val allowedLinks = capturedLinks.filter { 
             !it.name.contains("Castellano", true) && 
             !it.name.contains("España", true) && 
@@ -208,13 +205,11 @@ class AnimeflvnetProvider : MainAPI() {
             !it.name.contains(" ES", true)
         }
 
-        // 2. Prioritize Latino
         val hasLatino = allowedLinks.any { it.name.contains("Latino", true) || it.name.contains("LAT", true) }
         
         val finalLinks = if (hasLatino) {
              allowedLinks.filter { it.name.contains("Latino", true) || it.name.contains("LAT", true) }
         } else {
-            // 3. Allow Subtitled if no Latino (Animeflv is Anime)
             allowedLinks
         }
         
