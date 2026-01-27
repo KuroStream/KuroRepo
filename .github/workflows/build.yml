@@ -23,8 +23,14 @@ jobs:
       - name: Build Plugins
         run: |
           cd src
-          # Agregamos AnimeJl, Aniwatch, Aniwave y Bflix a la lista de borrado temporal
-          rm -rf PeliculasFlixProvider/ PelispediaProvider/ Pelisplus4KProvider/ PelisplusHDProvider/ PelisplusSOProvider/ PlayhubProvider/ SeriesflixProvider/ SeriesMetroProvider/ SoloLatinoProvider/ TioAnimeProvider/ AnimensionProvider/ AnimeflvProvider/ AnimeflvIOProvider/ AnimeJlProvider/ AniwatchProvider/ AniwaveProvider/ BflixProvider/
+          # Lista completa de proveedores no refactorizados para KuroStream
+          rm -rf PeliculasFlixProvider/ PelispediaProvider/ Pelisplus4KProvider/ PelisplusHDProvider/ PelisplusSOProvider/ PlayhubProvider/ SeriesflixProvider/ SeriesMetroProvider/ SoloLatinoProvider/ TioAnimeProvider/ AnimensionProvider/ AnimeflvProvider/ AnimeflvIOProvider/ AnimeJlProvider/ AniwatchProvider/ AniwaveProvider/ BflixProvider/ CablevisionHdProvider/ CinecalidadProvider/ CuevanaProvider/ ComamosRamenProvider/ DoramasytProvider/ EstrenosDoramasProvider/ IdonehdProvider/ InkapelisProvider/ JkanimeProvider/ MonoschinosProvider/
+          
+          chmod +x gradlew
+          ./gradlew make makePluginsJson
+          mkdir -p ../dist
+          cp build/plugins.json ../dist/
+          cp **/build/*.cs3 ../dist/ 2>/dev/null || true
           
           chmod +x gradlew
           ./gradlew make makePluginsJson
