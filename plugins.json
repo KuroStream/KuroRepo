@@ -5,16 +5,10 @@
     "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/SoloLatinoProvider.cs3",
     "iconUrl": "https://sololatino.net/wp-content/uploads/2020/10/cropped-logo-final-192x192.png",
     "language": "mx",
-    "tvTypes": [
-      "Movie",
-      "TvSeries",
-      "Anime",
-      "Cartoon"
-    ],
-    "authors": [
-      "misajimenezmx"
-    ],
-    "version": 6
+    "tvTypes": ["Movie", "TvSeries", "Anime", "Cartoon"],
+    "authors": ["misajimenezmx"],
+    "version": 6,
+    "apiVersion": 1
   },
   {
     "name": "Pelisplus HD",
@@ -22,14 +16,10 @@
     "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/PelisplusHDProvider.cs3",
     "iconUrl": "https://www.google.com/s2/favicons?domain=pelisplushd.nu&sz=128",
     "language": "mx",
-    "tvTypes": [
-      "TvSeries",
-      "Movie"
-    ],
-    "authors": [
-      "Stormunblessed"
-    ],
-    "version": 9
+    "tvTypes": ["TvSeries", "Movie"],
+    "authors": ["Stormunblessed"],
+    "version": 9,
+    "apiVersion": 1
   },
   {
     "name": "Pelisplus 4K",
@@ -37,16 +27,10 @@
     "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/Pelisplus4KProvider.cs3",
     "iconUrl": "https://www.google.com/s2/favicons?domain=pelisplus.to&sz=128",
     "language": "mx",
-    "tvTypes": [
-      "Movie",
-      "TvSeries",
-      "AsianDrama",
-      "Anime"
-    ],
-    "authors": [
-      "Stormunblessed"
-    ],
-    "version": 11
+    "tvTypes": ["Movie", "TvSeries", "AsianDrama", "Anime"],
+    "authors": ["Stormunblessed"],
+    "version": 11,
+    "apiVersion": 1
   },
   {
     "name": "Animeflv",
@@ -54,14 +38,10 @@
     "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/AnimeflvProvider.cs3",
     "iconUrl": "https://www.google.com/s2/favicons?domain=animeflv.net&sz=128",
     "language": "mx",
-    "tvTypes": [
-      "Anime",
-      "OVA"
-    ],
-    "authors": [
-      "Stormunblessed"
-    ],
-    "version": 6
+    "tvTypes": ["Anime", "OVA"],
+    "authors": ["Stormunblessed"],
+    "version": 6,
+    "apiVersion": 1
   },
   {
     "name": "LatAnime",
@@ -69,14 +49,10 @@
     "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/LatAnimeProvider.cs3",
     "iconUrl": "https://latanime.org/public/img/logito.png",
     "language": "mx",
-    "tvTypes": [
-      "Anime",
-      "OVA"
-    ],
-    "authors": [
-      "misajimenezmx"
-    ],
-    "version": 4
+    "tvTypes": ["Anime", "OVA"],
+    "authors": ["misajimenezmx"],
+    "version": 4,
+    "apiVersion": 1
   },
   {
     "name": "JKAnime",
@@ -84,14 +60,10 @@
     "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/JKAnimeProvider.cs3",
     "iconUrl": "https://www.google.com/s2/favicons?domain=jkanime.net&sz=128",
     "language": "mx",
-    "tvTypes": [
-      "Anime",
-      "OVA"
-    ],
-    "authors": [
-      "Stormunblessed"
-    ],
-    "version": 9
+    "tvTypes": ["Anime", "OVA"],
+    "authors": ["Stormunblessed"],
+    "version": 9,
+    "apiVersion": 1
   },
   {
     "name": "DeporTV",
@@ -99,13 +71,10 @@
     "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/DeporTVProvider.cs3",
     "iconUrl": "https://static.vecteezy.com/system/resources/previews/015/131/195/non_2x/soccer-sports-ball-free-png.png",
     "language": "mx",
-    "tvTypes": [
-      "Live"
-    ],
-    "authors": [
-      "redblacker8"
-    ],
-    "version": 7
+    "tvTypes": ["Live"],
+    "authors": ["redblacker8"],
+    "version": 7,
+    "apiVersion": 1
   },
   {
     "name": "Cinecalidad",
@@ -113,14 +82,10 @@
     "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/CinecalidadProvider.cs3",
     "iconUrl": "https://www.google.com/s2/favicons?domain=cinecalidad.lol&sz=128",
     "language": "mx",
-    "tvTypes": [
-      "TvSeries",
-      "Movie"
-    ],
-    "authors": [
-      "Stormunblessed"
-    ],
-    "version": 7
+    "tvTypes": ["TvSeries", "Movie"],
+    "authors": ["Stormunblessed"],
+    "version": 7,
+    "apiVersion": 1
   },
   {
     "name": "DoramasFlix",
@@ -128,13 +93,10 @@
     "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/DoramasFlixProvider.cs3",
     "iconUrl": "https://www.google.com/s2/favicons?domain=doramasflix.co&sz=128",
     "language": "mx",
-    "tvTypes": [
-      "AsianDrama"
-    ],
-    "authors": [
-      "Stormunblessed"
-    ],
-    "version": 7
+    "tvTypes": ["AsianDrama"],
+    "authors": ["Stormunblessed"],
+    "version": 7,
+    "apiVersion": 1
   },
   {
     "name": "TioAnime",
@@ -142,13 +104,9 @@
     "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/TioAnimeProvider.cs3",
     "iconUrl": "https://www.google.com/s2/favicons?domain=tioanime.com&sz=128",
     "language": "es",
-    "tvTypes": [
-      "Anime",
-      "OVA"
-    ],
-    "authors": [
-      "Stormunblessed"
-    ],
-    "version": 3
+    "tvTypes": ["Anime", "OVA"],
+    "authors": ["Stormunblessed"],
+    "version": 3,
+    "apiVersion": 1
   }
 ]
