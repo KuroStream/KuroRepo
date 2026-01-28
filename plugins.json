@@ -6,13 +6,8 @@
         "fileSize": 18727,
         "status": 1,
         "language": "mx",
-        "authors": [
-            "Stormunblessed"
-        ],
-        "tvTypes": [
-            "Anime",
-            "OVA"
-        ],
+        "authors": ["Stormunblessed"],
+        "tvTypes": ["Anime", "OVA"],
         "version": 6,
         "internalName": "AnimeflvProvider",
         "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/AnimeflvProvider.cs3",
@@ -25,12 +20,8 @@
         "fileSize": 17327,
         "status": 1,
         "language": "mx",
-        "authors": [
-            "misajimenezmx"
-        ],
-        "tvTypes": [
-            "Live"
-        ],
+        "authors": ["misajimenezmx"],
+        "tvTypes": ["Live"],
         "version": 5,
         "internalName": "CablevisionHdProvider",
         "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/CablevisionHdProvider.cs3",
@@ -43,13 +34,8 @@
         "fileSize": 15951,
         "status": 1,
         "language": "mx",
-        "authors": [
-            "Stormunblessed"
-        ],
-        "tvTypes": [
-            "TvSeries",
-            "Movie"
-        ],
+        "authors": ["Stormunblessed"],
+        "tvTypes": ["TvSeries", "Movie"],
         "version": 7,
         "internalName": "CinecalidadProvider",
         "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/CinecalidadProvider.cs3",
@@ -62,13 +48,8 @@
         "fileSize": 17926,
         "status": 1,
         "language": "mx",
-        "authors": [
-            "redblacker8"
-        ],
-        "tvTypes": [
-            "TvSeries",
-            "Movie"
-        ],
+        "authors": ["redblacker8"],
+        "tvTypes": ["TvSeries", "Movie"],
         "version": 2,
         "internalName": "CineHdPlusProvider",
         "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/CineHdPlusProvider.cs3",
@@ -81,12 +62,8 @@
         "fileSize": 55100,
         "status": 1,
         "language": "mx",
-        "authors": [
-            "redblacker8"
-        ],
-        "tvTypes": [
-            "Live"
-        ],
+        "authors": ["redblacker8"],
+        "tvTypes": ["Live"],
         "version": 7,
         "internalName": "DeporTVProvider",
         "description": "Deportes eventos en vivo. Sports live events. Futbol. Soccer.",
@@ -100,12 +77,8 @@
         "fileSize": 35339,
         "status": 1,
         "language": "mx",
-        "authors": [
-            "Stormunblessed"
-        ],
-        "tvTypes": [
-            "AsianDrama"
-        ],
+        "authors": ["Stormunblessed"],
+        "tvTypes": ["AsianDrama"],
         "version": 7,
         "internalName": "DoramasFlixProvider",
         "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/DoramasFlixProvider.cs3",
@@ -118,12 +91,8 @@
         "fileSize": 18190,
         "status": 1,
         "language": "mx",
-        "authors": [
-            "Stormunblessed"
-        ],
-        "tvTypes": [
-            "AsianDrama"
-        ],
+        "authors": ["Stormunblessed"],
+        "tvTypes": ["AsianDrama"],
         "version": 6,
         "internalName": "DoramasYTProvider",
         "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/DoramasYTProvider.cs3",
@@ -136,13 +105,8 @@
         "fileSize": 23391,
         "status": 1,
         "language": "mx",
-        "authors": [
-            "Stormunblessed"
-        ],
-        "tvTypes": [
-            "TvSeries",
-            "Movie"
-        ],
+        "authors": ["Stormunblessed"],
+        "tvTypes": ["TvSeries", "Movie"],
         "version": 9,
         "internalName": "EntrepeliculasyseriesProvider",
         "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/EntrepeliculasyseriesProvider.cs3",
@@ -155,12 +119,8 @@
         "fileSize": 19315,
         "status": 1,
         "language": "mx",
-        "authors": [
-            "Stormunblessed"
-        ],
-        "tvTypes": [
-            "AsianDrama"
-        ],
+        "authors": ["Stormunblessed"],
+        "tvTypes": ["AsianDrama"],
         "version": 3,
         "internalName": "EstrenosDoramasProvider",
         "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/EstrenosDoramasProvider.cs3",
@@ -173,13 +133,8 @@
         "fileSize": 23747,
         "status": 1,
         "language": "es",
-        "authors": [
-            "redblacker8"
-        ],
-        "tvTypes": [
-            "Movie",
-            "TvSeries"
-        ],
+        "authors": ["redblacker8"],
+        "tvTypes": ["Movie", "TvSeries"],
         "version": 4,
         "internalName": "HDFullProvider",
         "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/HDFullProvider.cs3",
@@ -192,13 +147,8 @@
         "fileSize": 30618,
         "status": 1,
         "language": "mx",
-        "authors": [
-            "Stormunblessed"
-        ],
-        "tvTypes": [
-            "Anime",
-            "OVA"
-        ],
+        "authors": ["Stormunblessed"],
+        "tvTypes": ["Anime", "OVA"],
         "version": 9,
         "internalName": "JKAnimeProvider",
         "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/JKAnimeProvider.cs3",
@@ -211,13 +161,8 @@
         "fileSize": 14110,
         "status": 1,
         "language": "es",
-        "authors": [
-            "Stormunblessed"
-        ],
-        "tvTypes": [
-            "Cartoons",
-            "TvSeries"
-        ],
+        "authors": ["Stormunblessed"],
+        "tvTypes": ["Cartoons", "TvSeries"],
         "version": 5,
         "internalName": "LACartoonsProvider",
         "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/LACartoonsProvider.cs3",
@@ -230,13 +175,8 @@
         "fileSize": 12938,
         "status": 1,
         "language": "mx",
-        "authors": [
-            "misajimenezmx"
-        ],
-        "tvTypes": [
-            "Anime",
-            "OVA"
-        ],
+        "authors": ["misajimenezmx"],
+        "tvTypes": ["Anime", "OVA"],
         "version": 4,
         "internalName": "LatAnimeProvider",
         "description": "Anime en latino y subtitulado.",
@@ -250,14 +190,8 @@
         "fileSize": 19796,
         "status": 1,
         "language": "es",
-        "authors": [
-            "Stormunblessed"
-        ],
-        "tvTypes": [
-            "Anime",
-            "OVA",
-            "AnimeMovie"
-        ],
+        "authors": ["Stormunblessed"],
+        "tvTypes": ["Anime", "OVA", "AnimeMovie"],
         "version": 3,
         "internalName": "MundoDonghuaProvider",
         "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/MundoDonghuaProvider.cs3",
@@ -270,15 +204,8 @@
         "fileSize": 51909,
         "status": 1,
         "language": "en",
-        "authors": [
-            "megix"
-        ],
-        "tvTypes": [
-            "Movie",
-            "TvSeries",
-            "AsianDrama",
-            "Anime"
-        ],
+        "authors": ["megix"],
+        "tvTypes": ["Movie", "TvSeries", "AsianDrama", "Anime"],
         "version": 38,
         "internalName": "NetflixMirrorProvider",
         "description": "Netflix, PrimeVideo, JioHotstar(Hotstar, Disney, Paramount, HBO, Peacock) Content in Multiple Languages",
@@ -292,15 +219,8 @@
         "fileSize": 17457,
         "status": 1,
         "language": "mx",
-        "authors": [
-            "Stormunblessed"
-        ],
-        "tvTypes": [
-            "Movie",
-            "TvSeries",
-            "AsianDrama",
-            "Anime"
-        ],
+        "authors": ["Stormunblessed"],
+        "tvTypes": ["Movie", "TvSeries", "AsianDrama", "Anime"],
         "version": 11,
         "internalName": "Pelisplus4KProvider",
         "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/Pelisplus4KProvider.cs3",
@@ -313,13 +233,8 @@
         "fileSize": 23645,
         "status": 1,
         "language": "mx",
-        "authors": [
-            "Stormunblessed"
-        ],
-        "tvTypes": [
-            "TvSeries",
-            "Movie"
-        ],
+        "authors": ["Stormunblessed"],
+        "tvTypes": ["TvSeries", "Movie"],
         "version": 9,
         "internalName": "PelisplusHDProvider",
         "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/PelisplusHDProvider.cs3",
@@ -332,13 +247,8 @@
         "fileSize": 14707,
         "status": 1,
         "language": "es",
-        "authors": [
-            "redblacker8"
-        ],
-        "tvTypes": [
-            "TvSeries",
-            "Movie"
-        ],
+        "authors": ["redblacker8"],
+        "tvTypes": ["TvSeries", "Movie"],
         "version": 2,
         "internalName": "PlaydedeProvider",
         "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/PlaydedeProvider.cs3",
@@ -351,15 +261,8 @@
         "fileSize": 25255,
         "status": 1,
         "language": "mx",
-        "authors": [
-            "misajimenezmx"
-        ],
-        "tvTypes": [
-            "Movie",
-            "TvSeries",
-            "Anime",
-            "Cartoon"
-        ],
+        "authors": ["misajimenezmx"],
+        "tvTypes": ["Movie", "TvSeries", "Anime", "Cartoon"],
         "version": 6,
         "internalName": "SoloLatinoProvider",
         "description": "Peliculas, series, animes y cartoons en Español y Español Latino",
@@ -373,12 +276,8 @@
         "fileSize": 25994,
         "status": 1,
         "language": "en",
-        "authors": [
-            "redblacker8"
-        ],
-        "tvTypes": [
-            "Live"
-        ],
+        "authors": ["redblacker8"],
+        "tvTypes": ["Live"],
         "version": 1,
         "internalName": "StreamedProvider",
         "description": "Multilang live sports",
@@ -392,13 +291,8 @@
         "fileSize": 16853,
         "status": 1,
         "language": "es",
-        "authors": [
-            "Stormunblessed"
-        ],
-        "tvTypes": [
-            "Anime",
-            "OVA"
-        ],
+        "authors": ["Stormunblessed"],
+        "tvTypes": ["Anime", "OVA"],
         "version": 3,
         "internalName": "TioAnimeProvider",
         "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/TioAnimeProvider.cs3",
@@ -411,15 +305,8 @@
         "fileSize": 38889,
         "status": 1,
         "language": "it",
-        "authors": [
-            "doGior"
-        ],
-        "tvTypes": [
-            "Movie",
-            "TvSeries",
-            "Torrent",
-            "Documentary"
-        ],
+        "authors": ["doGior"],
+        "tvTypes": ["Movie", "TvSeries", "Torrent", "Documentary"],
         "version": 4,
         "internalName": "Torrentio",
         "description": "Torrents from Torrentio",
@@ -433,13 +320,8 @@
         "fileSize": 36873,
         "status": 1,
         "language": "en",
-        "authors": [
-            "anhdaden",
-            "dogior"
-        ],
-        "tvTypes": [
-            "Live"
-        ],
+        "authors": ["anhdaden", "dogior"],
+        "tvTypes": ["Live"],
         "version": 1,
         "internalName": "IPTV",
         "description": "General IPTV player. Add a list in the settings and you'll see it in the plugins list in the home",
@@ -453,12 +335,8 @@
         "fileSize": 23484,
         "status": 1,
         "language": "en",
-        "authors": [
-            "doGior"
-        ],
-        "tvTypes": [
-            "Live"
-        ],
+        "authors": ["doGior"],
+        "tvTypes": ["Live"],
         "version": 3,
         "internalName": "Huhu",
         "description": "TV channels from huhu.to",
