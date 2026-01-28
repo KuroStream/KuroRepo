@@ -357,39 +357,5 @@
         "description": "TV channels from huhu.to",
         "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/Huhu.cs3",
         "name": "Huhu"
-    },
-    {
-        "iconUrl": "https://www.thestatesman.com/wp-content/uploads/2021/05/fancode.jpg",
-        "jarFileSize": 94935,
-        "apiVersion": 1,
-        "repositoryUrl": "https://github.com/KuroStream/KuroRepo",
-        "fileSize": 22580,
-        "status": 1,
-        "language": "en",
-        "authors": ["Phisher98"],
-        "tvTypes": ["Live"],
-        "version": 2,
-        "internalName": "PublicSportsIPTV",
-        "jarUrl": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/PublicSportsIPTV.jar",
-        "description": "Sports Live Streams (FanCode)",
-        "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/PublicSportsIPTV.cs3",
-        "name": "PublicSportsIPTV"
-    },
-    {
-        "iconUrl": "https://www.google.com/s2/favicons?domain=github.com&sz=%size%",
-        "jarFileSize": 148152,
-        "apiVersion": 1,
-        "repositoryUrl": "https://github.com/KuroStream/KuroRepo",
-        "fileSize": 22287,
-        "status": 1,
-        "language": "en",
-        "authors": ["Phisher98"],
-        "tvTypes": ["Live"],
-        "version": 5,
-        "internalName": "QuickIPTV",
-        "jarUrl": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/QuickIPTV.jar",
-        "description": "Includes PirateIPTV,Sports IPTV,Japanese IPTV,Sony IPTV",
-        "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/QuickIPTV.cs3",
-        "name": "QuickIPTV"
     }
 ]
