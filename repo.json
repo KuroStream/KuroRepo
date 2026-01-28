@@ -1,0 +1,9 @@
+{
+  "name": "KuroStream Latin Repo",
+  "description": "Repositorio oficial de KuroStream. Solo contenido en Latin Spanish (Anime, Películas y Series).",
+  "iconUrl": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/icon.png",
+  "manifestVersion": 1,
+  "pluginLists": [
+    "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/plugins.json"
+  ]
+}

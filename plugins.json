@@ -1,128 +1,154 @@
 [
   {
-    "name": "Latanime",
-    "url": "Latanime.cs3",
-    "version": 1,
-    "authors": [
-      "KuroStream"
+    "name": "SoloLatino",
+    "internalName": "SoloLatinoProvider",
+    "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/SoloLatinoProvider.cs3",
+    "iconUrl": "https://sololatino.net/wp-content/uploads/2020/10/cropped-logo-final-192x192.png",
+    "language": "mx",
+    "tvTypes": [
+      "Movie",
+      "TvSeries",
+      "Anime",
+      "Cartoon"
     ],
-    "language": "es"
+    "authors": [
+      "misajimenezmx"
+    ],
+    "version": 6
   },
   {
-    "name": "PelisplusHD",
-    "url": "Pelisplushd.cs3",
-    "version": 1,
-    "authors": [
-      "KuroStream"
+    "name": "Pelisplus HD",
+    "internalName": "PelisplusHDProvider",
+    "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/PelisplusHDProvider.cs3",
+    "iconUrl": "https://www.google.com/s2/favicons?domain=pelisplushd.nu&sz=128",
+    "language": "mx",
+    "tvTypes": [
+      "TvSeries",
+      "Movie"
     ],
-    "language": "es"
+    "authors": [
+      "Stormunblessed"
+    ],
+    "version": 9
   },
   {
-    "name": "AnimeAV1",
-    "url": "Animeav1.cs3",
-    "version": 1,
-    "authors": [
-      "KuroStream"
+    "name": "Pelisplus 4K",
+    "internalName": "Pelisplus4KProvider",
+    "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/Pelisplus4KProvider.cs3",
+    "iconUrl": "https://www.google.com/s2/favicons?domain=pelisplus.to&sz=128",
+    "language": "mx",
+    "tvTypes": [
+      "Movie",
+      "TvSeries",
+      "AsianDrama",
+      "Anime"
     ],
-    "language": "es"
+    "authors": [
+      "Stormunblessed"
+    ],
+    "version": 11
+  },
+  {
+    "name": "Animeflv",
+    "internalName": "AnimeflvProvider",
+    "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/AnimeflvProvider.cs3",
+    "iconUrl": "https://www.google.com/s2/favicons?domain=animeflv.net&sz=128",
+    "language": "mx",
+    "tvTypes": [
+      "Anime",
+      "OVA"
+    ],
+    "authors": [
+      "Stormunblessed"
+    ],
+    "version": 6
+  },
+  {
+    "name": "LatAnime",
+    "internalName": "LatAnimeProvider",
+    "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/LatAnimeProvider.cs3",
+    "iconUrl": "https://latanime.org/public/img/logito.png",
+    "language": "mx",
+    "tvTypes": [
+      "Anime",
+      "OVA"
+    ],
+    "authors": [
+      "misajimenezmx"
+    ],
+    "version": 4
+  },
+  {
+    "name": "JKAnime",
+    "internalName": "JKAnimeProvider",
+    "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/JKAnimeProvider.cs3",
+    "iconUrl": "https://www.google.com/s2/favicons?domain=jkanime.net&sz=128",
+    "language": "mx",
+    "tvTypes": [
+      "Anime",
+      "OVA"
+    ],
+    "authors": [
+      "Stormunblessed"
+    ],
+    "version": 9
+  },
+  {
+    "name": "DeporTV",
+    "internalName": "DeporTVProvider",
+    "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/DeporTVProvider.cs3",
+    "iconUrl": "https://static.vecteezy.com/system/resources/previews/015/131/195/non_2x/soccer-sports-ball-free-png.png",
+    "language": "mx",
+    "tvTypes": [
+      "Live"
+    ],
+    "authors": [
+      "redblacker8"
+    ],
+    "version": 7
   },
   {
     "name": "Cinecalidad",
-    "url": "CinecalidadProvider.cs3",
-    "version": 1,
-    "authors": [
-      "KuroStream"
+    "internalName": "CinecalidadProvider",
+    "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/CinecalidadProvider.cs3",
+    "iconUrl": "https://www.google.com/s2/favicons?domain=cinecalidad.lol&sz=128",
+    "language": "mx",
+    "tvTypes": [
+      "TvSeries",
+      "Movie"
     ],
-    "language": "es"
+    "authors": [
+      "Stormunblessed"
+    ],
+    "version": 7
   },
   {
-    "name": "SoloLatino",
-    "url": "SoloLatinoProvider.cs3",
-    "version": 1,
-    "authors": [
-      "KuroStream"
+    "name": "DoramasFlix",
+    "internalName": "DoramasFlixProvider",
+    "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/DoramasFlixProvider.cs3",
+    "iconUrl": "https://www.google.com/s2/favicons?domain=doramasflix.co&sz=128",
+    "language": "mx",
+    "tvTypes": [
+      "AsianDrama"
     ],
-    "language": "es"
+    "authors": [
+      "Stormunblessed"
+    ],
+    "version": 7
   },
   {
-    "name": "PeliculasFlix",
-    "url": "PeliculasFlixProvider.cs3",
-    "version": 1,
-    "authors": [
-      "KuroStream"
+    "name": "TioAnime",
+    "internalName": "TioAnimeProvider",
+    "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/TioAnimeProvider.cs3",
+    "iconUrl": "https://www.google.com/s2/favicons?domain=tioanime.com&sz=128",
+    "language": "es",
+    "tvTypes": [
+      "Anime",
+      "OVA"
     ],
-    "language": "es"
-  },
-  {
-    "name": "Entre Peliculas y Series",
-    "url": "EntrepeliculasyseriesProvider.cs3",
-    "version": 1,
     "authors": [
-      "KuroStream"
+      "Stormunblessed"
     ],
-    "language": "es"
-  },
-  {
-    "name": "LACartoons",
-    "url": "LACartoonsProvider.cs3",
-    "version": 1,
-    "authors": [
-      "KuroStream"
-    ],
-    "language": "es"
-  },
-  {
-    "name": "Deportes y TV (Cricify)",
-    "url": "CricifyProvider.cs3",
-    "version": 1,
-    "authors": [
-      "KuroStream"
-    ],
-    "language": "es"
-  },
-  {
-    "name": "Cablevisión HD (Canales)",
-    "url": "CablevisionHdProvider.cs3",
-    "version": 4,
-    "authors": [
-      "KuroStream"
-    ],
-    "language": "es"
-  },
-  {
-    "name": "TV en Vivo (Rtally)",
-    "url": "Rtally.cs3",
-    "version": 1,
-    "authors": [
-      "KuroStream"
-    ],
-    "language": "es"
-  },
-  {
-    "name": "SKTech TV",
-    "url": "SKTechProvider.cs3",
-    "version": 1,
-    "authors": [
-      "KuroStream"
-    ],
-    "language": "es"
-  },
-  {
-    "name": "SunGo TV",
-    "url": "SunGoProvider.cs3",
-    "version": 1,
-    "authors": [
-      "KuroStream"
-    ],
-    "language": "es"
-  },
-  {
-    "name": "Mega Buscador",
-    "url": "MegaProvider.cs3",
-    "version": 1,
-    "authors": [
-      "KuroStream"
-    ],
-    "language": "es"
+    "version": 3
   }
 ]
