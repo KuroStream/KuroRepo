@@ -135,8 +135,8 @@
     "status": 1,
     "language": "es",
     "authors": ["Stormunblessed"],
+    "tvTypes": ["Anime", "OVA"],
     "version": 3,
     "apiVersion": 1
   }
-]
 ]
