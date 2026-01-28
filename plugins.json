@@ -1,30 +1,139 @@
 [
     {
-        "iconUrl": "https://sololatino.net/wp-content/uploads/2020/10/cropped-logo-final-192x192.png",
+        "iconUrl": "https://www.google.com/s2/favicons?domain=animeflv.net&sz=%size%",
         "apiVersion": 1,
-        "repositoryUrl": "https://github.com/KuroStream/KuroRepo",
-        "fileSize": 25255,
+        "repositoryUrl": "https://github.com/KuroStream/KiritoRepo",
+        "fileSize": 18727,
+        "status": 1,
+        "language": "mx",
+        "authors": [
+            "Stormunblessed"
+        ],
+        "tvTypes": [
+            "Anime",
+            "OVA"
+        ],
+        "version": 6,
+        "internalName": "AnimeflvProvider",
+        "url": "https://raw.githubusercontent.com/KuroStream/KiritoRepo/builds/AnimeflvProvider.cs3",
+        "name": "AnimeflvProvider"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=cablevisionhd.com&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/KuroStream/KiritoRepo",
+        "fileSize": 17327,
         "status": 1,
         "language": "mx",
         "authors": [
             "misajimenezmx"
         ],
         "tvTypes": [
-            "Movie",
-            "TvSeries",
-            "Anime",
-            "Cartoon"
+            "Live"
         ],
-        "version": 6,
-        "internalName": "SoloLatinoProvider",
-        "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/SoloLatinoProvider.cs3",
-        "name": "SoloLatinoProvider"
+        "version": 5,
+        "internalName": "CablevisionHdProvider",
+        "url": "https://raw.githubusercontent.com/KuroStream/KiritoRepo/builds/CablevisionHdProvider.cs3",
+        "name": "CablevisionHdProvider"
     },
     {
-        "iconUrl": "https://www.google.com/s2/favicons?domain=pelisplushd.nu&sz=%size%",
+        "iconUrl": "https://www.google.com/s2/favicons?domain=cinecalidad.lol&sz=%size%",
         "apiVersion": 1,
-        "repositoryUrl": "https://github.com/KuroStream/KuroRepo",
-        "fileSize": 23645,
+        "repositoryUrl": "https://github.com/KuroStream/KiritoRepo",
+        "fileSize": 15951,
+        "status": 1,
+        "language": "mx",
+        "authors": [
+            "Stormunblessed"
+        ],
+        "tvTypes": [
+            "TvSeries",
+            "Movie"
+        ],
+        "version": 7,
+        "internalName": "CinecalidadProvider",
+        "url": "https://raw.githubusercontent.com/KuroStream/KiritoRepo/builds/CinecalidadProvider.cs3",
+        "name": "CinecalidadProvider"
+    },
+    {
+        "iconUrl": "https://cinehdplus.org/wp-content/uploads/2021/11/favicon.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/KuroStream/KiritoRepo",
+        "fileSize": 17926,
+        "status": 1,
+        "language": "mx",
+        "authors": [
+            "redblacker8"
+        ],
+        "tvTypes": [
+            "TvSeries",
+            "Movie"
+        ],
+        "version": 2,
+        "internalName": "CineHdPlusProvider",
+        "url": "https://raw.githubusercontent.com/KuroStream/KiritoRepo/builds/CineHdPlusProvider.cs3",
+        "name": "CineHdPlusProvider"
+    },
+    {
+        "iconUrl": "https://yt3.googleusercontent.com/T_d2j2xZMjAxPCehiFR6hAv7jE3swcUzfgV8wCXzv1IL7rCEDv3cgQtIxjdmLVyP6ZrSgIu0nw=s900-c-k-c0x00ffffff-no-rj",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/KuroStream/KiritoRepo",
+        "fileSize": 55100,
+        "status": 1,
+        "language": "mx",
+        "authors": [
+            "redblacker8"
+        ],
+        "tvTypes": [
+            "Live"
+        ],
+        "version": 7,
+        "internalName": "DeporTVProvider",
+        "description": "Deportes eventos en vivo. Sports live events. Futbol. Soccer.",
+        "url": "https://raw.githubusercontent.com/KuroStream/KiritoRepo/builds/DeporTVProvider.cs3",
+        "name": "DeporTVProvider"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=doramasflix.co&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/KuroStream/KiritoRepo",
+        "fileSize": 35339,
+        "status": 1,
+        "language": "mx",
+        "authors": [
+            "Stormunblessed"
+        ],
+        "tvTypes": [
+            "AsianDrama"
+        ],
+        "version": 7,
+        "internalName": "DoramasFlixProvider",
+        "url": "https://raw.githubusercontent.com/KuroStream/KiritoRepo/builds/DoramasFlixProvider.cs3",
+        "name": "DoramasFlixProvider"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=doramasyt.com&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/KuroStream/KiritoRepo",
+        "fileSize": 18190,
+        "status": 1,
+        "language": "mx",
+        "authors": [
+            "Stormunblessed"
+        ],
+        "tvTypes": [
+            "AsianDrama"
+        ],
+        "version": 6,
+        "internalName": "DoramasYTProvider",
+        "url": "https://raw.githubusercontent.com/KuroStream/KiritoRepo/builds/DoramasYTProvider.cs3",
+        "name": "DoramasYTProvider"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=entrepeliculasyseries.nz&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/KuroStream/KiritoRepo",
+        "fileSize": 23391,
         "status": 1,
         "language": "mx",
         "authors": [
@@ -35,14 +144,148 @@
             "Movie"
         ],
         "version": 9,
-        "internalName": "PelisplusHDProvider",
-        "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/PelisplusHDProvider.cs3",
-        "name": "PelisplusHDProvider"
+        "internalName": "EntrepeliculasyseriesProvider",
+        "url": "https://raw.githubusercontent.com/KuroStream/KiritoRepo/builds/EntrepeliculasyseriesProvider.cs3",
+        "name": "EntrepeliculasyseriesProvider"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=estrenosdoramas.net&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/KuroStream/KiritoRepo",
+        "fileSize": 19315,
+        "status": 1,
+        "language": "mx",
+        "authors": [
+            "Stormunblessed"
+        ],
+        "tvTypes": [
+            "AsianDrama"
+        ],
+        "version": 3,
+        "internalName": "EstrenosDoramasProvider",
+        "url": "https://raw.githubusercontent.com/KuroStream/KiritoRepo/builds/EstrenosDoramasProvider.cs3",
+        "name": "EstrenosDoramasProvider"
+    },
+    {
+        "iconUrl": "https://hdfullcdn.cc/favicon.ico",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/KuroStream/KiritoRepo",
+        "fileSize": 23747,
+        "status": 1,
+        "language": "es",
+        "authors": [
+            "redblacker8"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries"
+        ],
+        "version": 4,
+        "internalName": "HDFullProvider",
+        "url": "https://raw.githubusercontent.com/KuroStream/KiritoRepo/builds/HDFullProvider.cs3",
+        "name": "HDFullProvider"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=jkanime.net&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/KuroStream/KiritoRepo",
+        "fileSize": 30618,
+        "status": 1,
+        "language": "mx",
+        "authors": [
+            "Stormunblessed"
+        ],
+        "tvTypes": [
+            "Anime",
+            "OVA"
+        ],
+        "version": 9,
+        "internalName": "JKAnimeProvider",
+        "url": "https://raw.githubusercontent.com/KuroStream/KiritoRepo/builds/JKAnimeProvider.cs3",
+        "name": "JKAnimeProvider"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=lacartoons.com&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/KuroStream/KiritoRepo",
+        "fileSize": 14110,
+        "status": 1,
+        "language": "es",
+        "authors": [
+            "Stormunblessed"
+        ],
+        "tvTypes": [
+            "Cartoons",
+            "TvSeries"
+        ],
+        "version": 5,
+        "internalName": "LACartoonsProvider",
+        "url": "https://raw.githubusercontent.com/KuroStream/KiritoRepo/builds/LACartoonsProvider.cs3",
+        "name": "LACartoonsProvider"
+    },
+    {
+        "iconUrl": "https://latanime.org/public/img/logito.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/KuroStream/KiritoRepo",
+        "fileSize": 12938,
+        "status": 1,
+        "language": "mx",
+        "authors": [
+            "misajimenezmx"
+        ],
+        "tvTypes": [
+            "Anime",
+            "OVA"
+        ],
+        "version": 4,
+        "internalName": "LatAnimeProvider",
+        "description": "Anime en latino y subtitulado.",
+        "url": "https://raw.githubusercontent.com/KuroStream/KiritoRepo/builds/LatAnimeProvider.cs3",
+        "name": "LatAnimeProvider"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=monoschinos2.com&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/KuroStream/KiritoRepo",
+        "fileSize": 17314,
+        "status": 0,
+        "language": "mx",
+        "authors": [
+            "Stormunblessed"
+        ],
+        "tvTypes": [
+            "Anime",
+            "OVA"
+        ],
+        "version": 7,
+        "internalName": "MonoschinosProvider",
+        "url": "https://raw.githubusercontent.com/KuroStream/KiritoRepo/builds/MonoschinosProvider.cs3",
+        "name": "MonoschinosProvider"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=mundodonghua.com&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/KuroStream/KiritoRepo",
+        "fileSize": 19796,
+        "status": 1,
+        "language": "es",
+        "authors": [
+            "Stormunblessed"
+        ],
+        "tvTypes": [
+            "Anime",
+            "OVA",
+            "AnimeMovie"
+        ],
+        "version": 3,
+        "internalName": "MundoDonghuaProvider",
+        "url": "https://raw.githubusercontent.com/KuroStream/KiritoRepo/builds/MundoDonghuaProvider.cs3",
+        "name": "MundoDonghuaProvider"
     },
     {
         "iconUrl": "https://www.google.com/s2/favicons?domain=pelisplus.to&sz=%size%",
         "apiVersion": 1,
-        "repositoryUrl": "https://github.com/KuroStream/KuroRepo",
+        "repositoryUrl": "https://github.com/KuroStream/KiritoRepo",
         "fileSize": 17457,
         "status": 1,
         "language": "mx",
@@ -57,89 +300,14 @@
         ],
         "version": 11,
         "internalName": "Pelisplus4KProvider",
-        "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/Pelisplus4KProvider.cs3",
+        "url": "https://raw.githubusercontent.com/KuroStream/KiritoRepo/builds/Pelisplus4KProvider.cs3",
         "name": "Pelisplus4KProvider"
     },
     {
-        "iconUrl": "https://www.google.com/s2/favicons?domain=animeflv.net&sz=%size%",
+        "iconUrl": "https://www.google.com/s2/favicons?domain=pelisplushd.nu&sz=%size%",
         "apiVersion": 1,
-        "repositoryUrl": "https://github.com/KuroStream/KuroRepo",
-        "fileSize": 18727,
-        "status": 1,
-        "language": "mx",
-        "authors": [
-            "Stormunblessed"
-        ],
-        "tvTypes": [
-            "Anime",
-            "OVA"
-        ],
-        "version": 6,
-        "internalName": "AnimeflvProvider",
-        "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/AnimeflvProvider.cs3",
-        "name": "AnimeflvProvider"
-    },
-    {
-        "iconUrl": "https://latanime.org/public/img/logito.png",
-        "apiVersion": 1,
-        "repositoryUrl": "https://github.com/KuroStream/KuroRepo",
-        "fileSize": 12938,
-        "status": 1,
-        "language": "mx",
-        "authors": [
-            "misajimenezmx"
-        ],
-        "tvTypes": [
-            "Anime",
-            "OVA"
-        ],
-        "version": 4,
-        "internalName": "LatAnimeProvider",
-        "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/LatAnimeProvider.cs3",
-        "name": "LatAnimeProvider"
-    },
-    {
-        "iconUrl": "https://www.google.com/s2/favicons?domain=jkanime.net&sz=%size%",
-        "apiVersion": 1,
-        "repositoryUrl": "https://github.com/KuroStream/KuroRepo",
-        "fileSize": 30618,
-        "status": 1,
-        "language": "mx",
-        "authors": [
-            "Stormunblessed"
-        ],
-        "tvTypes": [
-            "Anime",
-            "OVA"
-        ],
-        "version": 9,
-        "internalName": "JKAnimeProvider",
-        "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/JKAnimeProvider.cs3",
-        "name": "JKAnimeProvider"
-    },
-    {
-        "iconUrl": "https://yt3.googleusercontent.com/T_d2j2xZMjAxPCehiFR6hAv7jE3swcUzfgV8wCXzv1IL7rCEDv3cgQtIxjdmLVyP6ZrSgIu0nw=s900-c-k-c0x00ffffff-no-rj",
-        "apiVersion": 1,
-        "repositoryUrl": "https://github.com/KuroStream/KuroRepo",
-        "fileSize": 55100,
-        "status": 1,
-        "language": "mx",
-        "authors": [
-            "redblacker8"
-        ],
-        "tvTypes": [
-            "Live"
-        ],
-        "version": 7,
-        "internalName": "DeporTVProvider",
-        "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/DeporTVProvider.cs3",
-        "name": "DeporTVProvider"
-    },
-    {
-        "iconUrl": "https://www.google.com/s2/favicons?domain=cinecalidad.lol&sz=%size%",
-        "apiVersion": 1,
-        "repositoryUrl": "https://github.com/KuroStream/KuroRepo",
-        "fileSize": 15951,
+        "repositoryUrl": "https://github.com/KuroStream/KiritoRepo",
+        "fileSize": 23645,
         "status": 1,
         "language": "mx",
         "authors": [
@@ -149,33 +317,75 @@
             "TvSeries",
             "Movie"
         ],
-        "version": 7,
-        "internalName": "CinecalidadProvider",
-        "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/CinecalidadProvider.cs3",
-        "name": "CinecalidadProvider"
+        "version": 9,
+        "internalName": "PelisplusHDProvider",
+        "url": "https://raw.githubusercontent.com/KuroStream/KiritoRepo/builds/PelisplusHDProvider.cs3",
+        "name": "PelisplusHDProvider"
     },
     {
-        "iconUrl": "https://www.google.com/s2/favicons?domain=doramasflix.co&sz=%size%",
+        "iconUrl": "https://playdede.in/public/assets/favicon.ico",
         "apiVersion": 1,
-        "repositoryUrl": "https://github.com/KuroStream/KuroRepo",
-        "fileSize": 35339,
+        "repositoryUrl": "https://github.com/KuroStream/KiritoRepo",
+        "fileSize": 14707,
+        "status": 1,
+        "language": "es",
+        "authors": [
+            "redblacker8"
+        ],
+        "tvTypes": [
+            "TvSeries",
+            "Movie"
+        ],
+        "version": 2,
+        "internalName": "PlaydedeProvider",
+        "url": "https://raw.githubusercontent.com/KuroStream/KiritoRepo/builds/PlaydedeProvider.cs3",
+        "name": "PlaydedeProvider"
+    },
+    {
+        "iconUrl": "https://sololatino.net/wp-content/uploads/2020/10/cropped-logo-final-192x192.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/KuroStream/KiritoRepo",
+        "fileSize": 25255,
         "status": 1,
         "language": "mx",
         "authors": [
-            "Stormunblessed"
+            "misajimenezmx"
         ],
         "tvTypes": [
-            "AsianDrama"
+            "Movie",
+            "TvSeries",
+            "Anime",
+            "Cartoon"
         ],
-        "version": 7,
-        "internalName": "DoramasFlixProvider",
-        "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/DoramasFlixProvider.cs3",
-        "name": "DoramasFlixProvider"
+        "version": 6,
+        "internalName": "SoloLatinoProvider",
+        "description": "Peliculas, series, animes y cartoons en Español y Español Latio",
+        "url": "https://raw.githubusercontent.com/KuroStream/KiritoRepo/builds/SoloLatinoProvider.cs3",
+        "name": "SoloLatinoProvider"
+    },
+    {
+        "iconUrl": "https://streamed.pk/favicon.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/KuroStream/KiritoRepo",
+        "fileSize": 25994,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "redblacker8"
+        ],
+        "tvTypes": [
+            "Live"
+        ],
+        "version": 1,
+        "internalName": "StreamedProvider",
+        "description": "Multilang live sports",
+        "url": "https://raw.githubusercontent.com/KuroStream/KiritoRepo/builds/StreamedProvider.cs3",
+        "name": "StreamedProvider"
     },
     {
         "iconUrl": "https://www.google.com/s2/favicons?domain=tioanime.com&sz=%size%",
         "apiVersion": 1,
-        "repositoryUrl": "https://github.com/KuroStream/KuroRepo",
+        "repositoryUrl": "https://github.com/KuroStream/KiritoRepo",
         "fileSize": 16853,
         "status": 1,
         "language": "es",
@@ -188,7 +398,7 @@
         ],
         "version": 3,
         "internalName": "TioAnimeProvider",
-        "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/TioAnimeProvider.cs3",
+        "url": "https://raw.githubusercontent.com/KuroStream/KiritoRepo/builds/TioAnimeProvider.cs3",
         "name": "TioAnimeProvider"
     }
 ]
