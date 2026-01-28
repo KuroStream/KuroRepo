@@ -285,6 +285,21 @@
         "name": "StreamedProvider"
     },
     {
+        "iconUrl": "https://files.catbox.moe/ol63rm.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/KuroStream/KuroRepo",
+        "fileSize": 71621,
+        "status": 1,
+        "language": "en",
+        "authors": ["Hexated", "phisher98", "erynith"],
+        "tvTypes": ["TvSeries", "Movie", "Torrent"],
+        "version": 9,
+        "internalName": "StremioAddon",
+        "description": "[!] Requires Setup - Allows you to use any Stremio addon by pasting their manifest.json url",
+        "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/StremioAddon.cs3",
+        "name": "StremioAddon"
+    },
+    {
         "iconUrl": "https://www.google.com/s2/favicons?domain=tioanime.com&sz=%size%",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/KuroStream/KuroRepo",
@@ -320,7 +335,7 @@
         "fileSize": 36873,
         "status": 1,
         "language": "en",
-        "authors": ["anhdaden", "dogior"],
+        "authors": ["andhaden", "dogior"],
         "tvTypes": ["Live"],
         "version": 1,
         "internalName": "IPTV",
@@ -343,27 +358,4 @@
         "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/Huhu.cs3",
         "name": "Huhu"
     }
-    {
-    "iconUrl": "https://files.catbox.moe/ol63rm.png",
-    "apiVersion": 1,
-    "repositoryUrl": "https://github.com/KuroStream/KuroRepo",
-    "fileSize": 71621,
-    "status": 1,
-    "language": "en",
-    "authors": [
-        "Hexated",
-        "phisher98",
-        "erynith"
-    ],
-    "tvTypes": [
-        "TvSeries",
-        "Movie",
-        "Torrent"
-    ],
-    "version": 9,
-    "internalName": "StremioAddon",
-    "description": "[!] Requires Setup - Allows you to use any Stremio addon by pasting their manifest.json url",
-    "url": "https://raw.githubusercontent.com/KuroStream/KuroRepo/builds/StremioAddon.cs3",
-    "name": "StremioAddon"
-}
 ]
